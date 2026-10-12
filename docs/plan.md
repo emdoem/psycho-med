@@ -107,10 +107,15 @@ the archived text wins.
     └── css/style.css      # single stylesheet for all pages
 ```
 
-`mockup/landing.html` holds the landing-page mock-up: one self-contained file
-that carries its own `<style>`, needs no asset to open, and is the approved
-visual reference for `index.html` and `assets/css/style.css`. It is not part of
-the deployed site and carries no analytics, no canonical link and no Open Graph
+`mockup/` holds three self-contained landing-page mock-ups, each one file with
+its own `<style>` and no asset to open: `option-a.html` (warm slate and sand,
+card grid, dark bands — the leading recommendation in
+[ADR 0007](adr/0007-warm-slate-typography-redesign.md)), `option-b.html`
+(light, squared, hairline rules, institutional blue, left rail) and
+`option-c.html` (bold poster, vermilion, monospaced labels, numbered index).
+They exist so the palette and the layout can be chosen together rather than
+argued about; none is a decision until the client picks one. They are not part
+of the deployed site and carry no analytics, no canonical link and no Open Graph
 tags, since those hard-code a domain that is not chosen yet
 ([ADR 0006](adr/0006-seo-metadata-and-analytics.md), risk 1).
 
@@ -120,22 +125,24 @@ rejects that.
 
 ## Milestones
 
-1. **Mock-up** — `mockup/landing.html`, one self-contained file with its own
-   `<style>`, no assets, no JavaScript. Shows the palette, the hero, the cards
-   and the footer as they will ship. Takes the client's sign-off before any
-   production page is written.
-2. **Scaffold** — directory layout, `assets/css/style.css` carrying the mock-up
-   rules, shared header and footer markup for all four pages.
-2. **Na temat fundacji** — port the six paragraphs. Smallest page, ported first
+1. **Mock-up** — `mockup/option-a.html`, `option-b.html` and `option-c.html`,
+   each one self-contained file with its own `<style>`, no assets, no
+   JavaScript. Three palettes and three layouts so the client can pick one.
+   The record of the choice is a new ADR, and
+   [ADR 0007](adr/0007-warm-slate-typography-redesign.md) stays `proposed`
+   until then.
+2. **Scaffold** — directory layout, `assets/css/style.css` carrying the chosen
+   mock-up's rules, shared header and footer markup for all four pages.
+3. **Na temat fundacji** — port the six paragraphs. Smallest page, ported first
    to validate the header/footer and stylesheet.
-3. **Kursy doskonalące** — port the three course articles and add the
+4. **Kursy doskonalące** — port the three course articles and add the
    `#program`, `#kryteria` and `#zapisy` anchors the home page links to.
-4. **Strona główna** — build `index.html` from the approved mock-up: identity
-   block, hero lead, the two article cards, contact e-mail, bank account.
-5. **Warto odwiedzić** — build the link list from the menu sub-items.
-6. **Chrome** — `404.html`, `robots.txt`, `sitemap.xml`, favicon, page titles
+5. **Strona główna** — build `index.html` from the approved mock-up: identity
+   block, hero lead, the two article blocks, contact e-mail, bank account.
+6. **Warto odwiedzić** — build the link list from the menu sub-items.
+7. **Chrome** — `404.html`, `robots.txt`, `sitemap.xml`, favicon, page titles
    and meta descriptions.
-7. **Review** — responsive check at 320px, 768px and 1280px; keyboard and
+8. **Review** — responsive check at 320px, 768px and 1280px; keyboard and
    screen-reader pass; link check against the legacy URLs; recompute the
    contrast ratios in [ADR 0007](adr/0007-warm-slate-typography-redesign.md).
 

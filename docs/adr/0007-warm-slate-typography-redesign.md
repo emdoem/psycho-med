@@ -1,9 +1,17 @@
 # ADR 0007: Restyle the site in a warm slate and sand palette with a typography-led layout
 
-- Status: accepted
+- Status: proposed
 - Date: 2026-10-11
 - Replaces: [ADR 0004](0004-styling-and-accessibility.md), which is marked
   rejected
+
+Three mock-ups now exist under `mockup/`: `option-a.html` (this document),
+`option-b.html` (light, ruled, institutional blue, left rail) and `option-c.html`
+(bold poster, vermilion, monospaced labels). This ADR describes option A, which
+is the leading recommendation, not a settled palette. The decision stays
+`proposed` until the client picks an option, at which point a fresh ADR records
+the choice and this one is marked `accepted` or `rejected`. The decision to
+redesign at all, against ADR 0004, is settled; only which palette wins is open.
 
 ## Context
 
