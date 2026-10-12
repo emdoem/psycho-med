@@ -1,7 +1,10 @@
 # ADR 0004: Styling follows the legacy text-only branding, made responsive and accessible
 
-- Status: proposed
+- Status: rejected
 - Date: 2026-10-10
+- Superseded by: [ADR 0007](0007-warm-slate-typography-redesign.md), 2026-10-11.
+  This decision was proposed and then rejected in favour of ADR 0007; the
+  accessibility and responsiveness rules below are carried forward there.
 
 ## Context
 
@@ -51,9 +54,10 @@ problem to solve. Nothing that does not exist may be referenced.
 
 - **Pixel-exact reproduction of the legacy layout, `80%` width included.**
   Rejected: it is unreadable on a phone, and the site is read on phones.
-- **A full redesign with a new brand palette.** Rejected: the foundation has an
-  established identity, the blue-gradient nav is recognisable, and a redesign
-  would be undated content moving for cosmetic reasons.
+- **A full redesign with a new brand palette.** Rejected by
+  [ADR 0007](0007-warm-slate-typography-redesign.md): the blue gradient was a
+  WordPress theme default rather than a brand asset, and the corpus contains no
+  image, logo or colour specification that a palette change could violate.
 - **Adopt a CSS framework** (Bootstrap, Tailwind). Rejected: a handful of rules
   covers this site, and a framework is exactly the build/toolchain dependency
   [ADR 0001](0001-plain-html-css.md) excludes.

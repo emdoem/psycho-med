@@ -9,9 +9,11 @@ Index of every ADR in this repository. The general plan lives at
 | [0001](0001-plain-html-css.md) | Build the site as plain HTML and CSS with no build step | accepted |
 | [0002](0002-site-information-architecture.md) | Site information architecture | accepted |
 | [0003](0003-content-fidelity.md) | Reproduce the archived content verbatim with a single shared source for contact data | accepted |
-| [0004](0004-styling-and-accessibility.md) | Styling follows the legacy text-only branding, made responsive and accessible | accepted |
+| [0004](0004-styling-and-accessibility.md) | Styling follows the legacy text-only branding, made responsive and accessible | rejected by 0007 |
 | [0005](0005-hosting-and-deployment.md) | Host the site as static files on a static host | accepted |
 | [0006](0006-seo-metadata-and-analytics.md) | Minimal, hand-written SEO metadata and no analytics | accepted |
+| [0007](0007-warm-slate-typography-redesign.md) | Restyle the site in a warm slate and sand palette with a typography-led layout | accepted |
+| [0008](0008-home-page-as-entry-point.md) | Make the home page an entry point that links to the articles instead of printing them | accepted |
 
 ## Numbering
 

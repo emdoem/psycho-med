@@ -1,0 +1,436 @@
+﻿<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strona główna | Fundacja PSYCHOMED</title>
+<meta name="description" content="Fundacja dla Celów Rozwoju Podejścia Psychobiospołecznego w Medycynie PSYCHOMED im Prof. Jerzego W. Aleksandrowicza — kurs psychoterapii, działalność fundacji, dane kontaktowe i numer konta bankowego.">
+<style>
+:root{
+  --canvas:#f7f4ef;
+  --surface:#ffffff;
+  --ink:#1b2029;
+  --ink-soft:#4c5666;
+  --line:#e3ddd3;
+  --line-strong:#d6cec1;
+  --slate:#2b3648;
+  --slate-deep:#1f2836;
+  --sand:#e8dcc8;
+  --sand-soft:#f1e9db;
+  --accent:#8a5a17;
+  --link:#7a5316;
+  --radius:14px;
+  --page:1120px;
+  --font:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --shadow:0 1px 2px rgba(27,32,41,.04),0 16px 32px -22px rgba(27,32,41,.45);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--canvas);
+  color:var(--ink);
+  font-family:var(--font);
+  font-size:1.0625rem;
+  line-height:1.7;
+}
+h1,h2,h3{margin:0;line-height:1.15;letter-spacing:-.015em}
+p{margin:0 0 1em}
+p:last-child{margin-bottom:0}
+ul{margin:0;padding:0;list-style:none}
+a{color:var(--link)}
+a:hover{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:5px}
+
+.wrap{
+  width:100%;
+  max-width:var(--page);
+  margin-inline:auto;
+  padding-inline:clamp(1.25rem,4vw,2.5rem);
+}
+
+.skip{
+  position:absolute;
+  left:-9999px;
+  top:0;
+  z-index:20;
+  background:var(--surface);
+  color:var(--ink);
+  padding:.75rem 1.1rem;
+  border:1px solid var(--line);
+  border-radius:0 0 8px 0;
+  font-weight:600;
+}
+.skip:focus{left:0;top:0}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:rgba(255,255,255,.88);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.topbar__inner{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:.4rem 1.5rem;
+  padding-block:.8rem;
+}
+.brand{
+  font-weight:700;
+  font-size:1rem;
+  letter-spacing:.16em;
+  color:var(--ink);
+  text-decoration:none;
+}
+.brand:hover{color:var(--accent)}
+.nav{display:flex;flex-wrap:wrap;gap:.2rem 1.35rem;font-size:.95rem}
+.nav a{
+  display:inline-block;
+  padding-block:.3rem;
+  color:var(--ink-soft);
+  text-decoration:none;
+  border-bottom:2px solid transparent;
+}
+.nav a:hover{color:var(--ink);border-bottom-color:var(--line-strong)}
+.nav a[aria-current="page"]{color:var(--ink);font-weight:600;border-bottom-color:var(--accent)}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  color:#ffffff;
+  background:
+    radial-gradient(70rem 28rem at 88% -25%,rgba(232,220,200,.22),transparent 62%),
+    radial-gradient(45rem 22rem at 2% 125%,rgba(232,220,200,.13),transparent 60%),
+    linear-gradient(180deg,var(--slate) 0%,var(--slate-deep) 100%);
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 88px);
+}
+.hero__inner{
+  position:relative;
+  display:grid;
+  gap:clamp(2.25rem,5vw,4rem);
+  padding-block:clamp(3rem,8vw,5.5rem);
+}
+@media (min-width:62rem){
+  .hero__inner{grid-template-columns:minmax(0,1.55fr) minmax(15rem,.85fr);align-items:end}
+}
+.hero__eyebrow{
+  margin:0 0 1.35rem;
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.19em;
+  text-transform:uppercase;
+  color:var(--sand);
+}
+.hero__title{
+  margin:0 0 .9rem;
+  font-size:clamp(1.8rem,1rem + 3.4vw,3.05rem);
+  font-weight:700;
+  letter-spacing:-.03em;
+  line-height:1.08;
+}
+.hero__brand{color:var(--sand)}
+.hero__patron{
+  margin:0 0 1.5rem;
+  font-size:.95rem;
+  letter-spacing:.03em;
+  color:var(--sand);
+}
+.hero__rule{
+  width:4rem;
+  height:2px;
+  margin:0 0 1.5rem;
+  padding:0;
+  border:0;
+  background:var(--sand);
+}
+.hero__lead{
+  max-width:36ch;
+  margin:0 0 2rem;
+  font-size:clamp(1.05rem,.98rem + .5vw,1.3rem);
+  color:#f4efe6;
+}
+.hero__actions{display:flex;flex-wrap:wrap;gap:.75rem;margin:0}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.55rem;
+  padding:.8rem 1.45rem;
+  border:1px solid transparent;
+  border-radius:999px;
+  font:inherit;
+  font-weight:600;
+  text-decoration:none;
+  transition:transform .18s ease,background-color .18s ease,border-color .18s ease;
+}
+.btn--primary{background:var(--sand);color:var(--slate-deep)}
+.btn--primary:hover{background:#ffffff;color:var(--slate-deep)}
+.btn--ghost{border-color:rgba(232,220,200,.5);color:var(--sand)}
+.btn--ghost:hover{background:rgba(232,220,200,.14);color:var(--sand)}
+.btn:focus-visible{outline-color:var(--sand)}
+
+.hero__panel{
+  padding:clamp(1.25rem,2.4vw,1.75rem);
+  border:1px solid rgba(232,220,200,.24);
+  border-radius:var(--radius);
+  background:rgba(255,255,255,.045);
+}
+.facts{margin:0}
+.facts__row{
+  display:flex;
+  align-items:baseline;
+  gap:1rem;
+  padding:.85rem 0;
+  border-top:1px solid rgba(232,220,200,.22);
+}
+.facts__row:first-child{border-top:0;padding-top:0}
+.facts__row:last-child{padding-bottom:0}
+.facts__value{
+  min-width:3.4ch;
+  font-size:1.85rem;
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+  color:var(--sand);
+}
+.facts__label{font-size:.95rem;color:#e7dfd2}
+
+.section{padding-block:clamp(3rem,7vw,4.75rem)}
+.section__inner{display:grid;gap:clamp(1rem,2.5vw,1.5rem)}
+@media (min-width:48rem){
+  .section__inner--two{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+.card{
+  display:flex;
+  flex-direction:column;
+  gap:.85rem;
+  padding:clamp(1.5rem,3vw,2.25rem);
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:0 1px 2px rgba(27,32,41,.04);
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+.card__eyebrow{
+  margin:0;
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--accent);
+}
+.card__title{font-size:clamp(1.22rem,1.02rem + .6vw,1.6rem);font-weight:700}
+.card__title a{color:inherit;text-decoration:none}
+.card__title a:hover{color:var(--accent)}
+.card__text{margin:0;max-width:54ch;color:var(--ink-soft)}
+.card__links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.4rem 1.35rem;
+  margin-top:auto;
+  padding-top:.5rem;
+  font-size:.95rem;
+}
+.arrow-link{font-weight:600;text-decoration:none;border-bottom:1px solid transparent}
+.arrow-link:hover{border-bottom-color:currentColor}
+.arrow-link::after{content:" \2192"}
+
+.utility{margin-top:clamp(1rem,2.5vw,1.5rem)}
+.utility .card{gap:.6rem}
+.card__value{margin:0;font-size:1.12rem;font-weight:600}
+.card__note{margin:0;font-size:.95rem;color:var(--ink-soft)}
+.bank{
+  margin:.15rem 0 0;
+  padding:.85rem 1.1rem;
+  background:var(--sand-soft);
+  border:1px solid var(--line);
+  border-radius:10px;
+  font-size:1.1rem;
+  font-weight:600;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.03em;
+}
+
+.site-footer{
+  background:
+    radial-gradient(60rem 20rem at 90% 0%,rgba(232,220,200,.14),transparent 60%),
+    linear-gradient(180deg,var(--slate) 0%,var(--slate-deep) 100%);
+  color:#f4efe6;
+  padding-block:clamp(2.75rem,6vw,4rem);
+}
+.site-footer a{color:var(--sand)}
+.footer__inner{display:grid;gap:2.25rem}
+@media (min-width:48rem){
+  .footer__inner{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1.1fr)}
+}
+.footer__name{margin:0 0 .6rem;font-size:1.05rem;font-weight:700;color:#ffffff}
+.footer__meta{margin:0;font-size:.95rem;color:#ded5c6}
+.footer__title{
+  margin:0 0 .9rem;
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--sand);
+}
+.footer__list{display:grid;gap:.45rem;font-size:.95rem}
+.footer__list a{color:#f4efe6;text-decoration:none;border-bottom:1px solid rgba(232,220,200,.35)}
+.footer__list a:hover{color:var(--sand);border-bottom-color:var(--sand)}
+.footer__bottom{
+  margin-top:clamp(2rem,4vw,2.75rem);
+  padding-top:1.25rem;
+  border-top:1px solid rgba(232,220,200,.24);
+  font-size:.9rem;
+  color:#c9c0b1;
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}
+  .card:hover,.btn:hover{transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Przeskocz do treści</a>
+
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <a class="brand" href="/index.html" rel="home">PSYCHOMED</a>
+    <nav aria-label="Główne menu">
+      <ul class="nav">
+        <li><a href="/index.html" aria-current="page">Strona główna</a></li>
+        <li><a href="/na-temat-fundacji.html">Na temat fundacji</a></li>
+        <li><a href="/kursy-doskonalace.html">Kursy doskonalące</a></li>
+        <li><a href="/warto-odwiedzic.html">Warto odwiedzić</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero__inner">
+      <div>
+        <p class="hero__eyebrow">Fundacja · Kraków</p>
+        <h1 class="hero__title" id="hero-title">Fundacja dla Celów Rozwoju<br>Podejścia Psychobiospołecznego w Medycynie <span class="hero__brand">PSYCHOMED</span></h1>
+        <p class="hero__patron">im Prof. Jerzego W. Aleksandrowicza</p>
+        <hr class="hero__rule">
+        <p class="hero__lead">Fundacja „Psychomed” działa nieprzerwanie od 1992 roku.</p>
+        <p class="hero__actions">
+          <a class="btn btn--primary" href="/kursy-doskonalace.html">Kursy doskonalące</a>
+          <a class="btn btn--ghost" href="/na-temat-fundacji.html">Na temat fundacji</a>
+        </p>
+      </div>
+      <div class="hero__panel">
+        <dl class="facts">
+          <div class="facts__row">
+            <dt class="facts__value">1992</dt>
+            <dd class="facts__label">rok rozpoczęcia działalności fundacji</dd>
+          </div>
+          <div class="facts__row">
+            <dt class="facts__value">10</dt>
+            <dd class="facts__label">sesji weekendowych rocznie</dd>
+          </div>
+          <div class="facts__row">
+            <dt class="facts__value">4</dt>
+            <dd class="facts__label">lata kształcenia na kursie</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Artykuły">
+    <div class="wrap section__inner section__inner--two">
+      <article class="card">
+        <p class="card__eyebrow">Kursy doskonalące</p>
+        <h2 class="card__title"><a href="/kursy-doskonalace.html">Kurs psychoterapii – informacje podstawowe</a></h2>
+        <p class="card__text">Certyfikat Psychoterapeuty Polskiego Towarzystwa Psychiatrycznego.</p>
+        <p class="card__links">
+          <a class="arrow-link" href="/kursy-doskonalace.html#program">Program kursu</a>
+          <a class="arrow-link" href="/kursy-doskonalace.html#kryteria">Kryteria przyjęcia</a>
+          <a class="arrow-link" href="/kursy-doskonalace.html#zapisy">Zapisy</a>
+        </p>
+      </article>
+
+      <article class="card">
+        <p class="card__eyebrow">Na temat fundacji</p>
+        <h2 class="card__title"><a href="/na-temat-fundacji.html">Działalność fundacji</a></h2>
+        <p class="card__text">Działalność fundacji obejmuje wspieranie aktywności osób i instytucji przyczyniających się do rozpowszechniania modelu psychobiospołecznego w medycynie.</p>
+        <p class="card__links">
+          <a class="arrow-link" href="/na-temat-fundacji.html">Cele statutowe</a>
+        </p>
+      </article>
+    </div>
+
+    <div class="wrap utility section__inner section__inner--two">
+      <article class="card">
+        <p class="card__eyebrow">Kontakt</p>
+        <h2 class="card__title">Dane kontaktowe</h2>
+        <p class="card__value"><a href="mailto:biuro.psychomed@gmail.com">biuro.psychomed@gmail.com</a></p>
+        <p class="card__note">ul. Cieszyńska 14/11, 30-015 Kraków</p>
+      </article>
+
+      <article class="card">
+        <p class="card__eyebrow">Wsparcie</p>
+        <h2 class="card__title">Numer konta bankowego</h2>
+        <p class="bank">20 1020 2892 0000 5102 0153 0997</p>
+        <p class="card__note">Fundacja „PSYCHOMED”, PKO BP</p>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__inner">
+      <div>
+        <p class="footer__name">Fundacja dla Celów Rozwoju Podejścia Psychobiospołecznego w Medycynie PSYCHOMED</p>
+        <p class="footer__meta">
+          im Prof. Jerzego W. Aleksandrowicza<br>
+          ul. Cieszyńska 14/11, 30-015 Kraków<br>
+          NIP 676-100-20-27 · KRS 0000108086<br>
+          <a href="mailto:biuro.psychomed@gmail.com">biuro.psychomed@gmail.com</a>
+        </p>
+      </div>
+      <nav aria-label="Główne menu">
+        <h2 class="footer__title">Główne menu</h2>
+        <ul class="footer__list">
+          <li><a href="/index.html">Strona główna</a></li>
+          <li><a href="/na-temat-fundacji.html">Na temat fundacji</a></li>
+          <li><a href="/kursy-doskonalace.html">Kursy doskonalące</a></li>
+          <li><a href="/warto-odwiedzic.html">Warto odwiedzić</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Warto odwiedzić">
+        <h2 class="footer__title">Warto odwiedzić</h2>
+        <ul class="footer__list">
+          <li><a href="http://kurs-psychoterapii.pl/" rel="noopener">Kurs psychoterapii</a></li>
+          <li><a href="https://www.mckp.uj.edu.pl/studia/podstawy-psychoterapii/" rel="noopener">MCKP UJ – studia psychoterapii</a></li>
+          <li><a href="http://www.psychoterapia.wl.uj.edu.pl/" rel="noopener">Katedra Psychoterapii UJ CM</a></li>
+          <li><a href="http://ptp.malopolska.pl/" rel="noopener">Oddział Krakowski PTP</a></li>
+          <li><a href="http://psychiatria.org.pl/strona_zarzadu_sekcji_psychoterapii" rel="noopener">Sekcja Naukowa Psychoterapii PTP</a></li>
+        </ul>
+      </nav>
+    </div>
+    <p class="footer__bottom">©Fundacja PSYCHOMED</p>
+  </div>
+</footer>
+
+</body>
+</html>
