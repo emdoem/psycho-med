@@ -1,0 +1,10 @@
+#img-custom {
+	width: 100%;
+}
+
+.img-custom {
+	width: 98%;
+	margin: 0px;
+	vertical-align:middle;
+	text-align: center;
+}

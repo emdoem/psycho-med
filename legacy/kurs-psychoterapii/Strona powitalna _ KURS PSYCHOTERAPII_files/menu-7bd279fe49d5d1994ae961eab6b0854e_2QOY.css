@@ -1,0 +1,22 @@
+@media (min-width: 901px) {
+  .region-menubar .menu-item, body:not(:target) .region-menubar .menu-item {
+    float:none!important;
+  }
+}
+
+@media (min-width: 461px) and (max-width: 900px) {
+  .region-menubar .menu-item, body:not(:target) .region-menubar .menu-item {
+  	  float:none!important;
+  }
+}
+.menu-toggle {
+	display: none!important;
+	visibility: hidden!important;
+	opacity: 0;
+	font-size: 0em!important;
+	
+}
+
+.menu-item {
+margin: 4px 4px 4px 0px!important;	
+}

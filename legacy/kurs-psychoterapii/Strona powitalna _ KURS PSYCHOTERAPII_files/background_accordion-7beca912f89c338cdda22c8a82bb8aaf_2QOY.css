@@ -1,0 +1,30 @@
+.styled {
+background-color: #fffefb!important;
+color: #534336!important;
+}
+
+.active a {
+background-color: #ebe5d5!important;
+color: #534336!important;
+}
+
+.ckeditor-accordion-container dl {
+border: 1px solid;
+border-color: #ebe5d5!important;
+color: #534336;
+}
+
+.ckeditor-accordion-toggler {
+background-color: #ebe5d5!important;
+color: #534336!important;
+}
+
+.ckeditor-accordion-container dl {
+background-color: #fffefb!important;
+color: #534336!important;
+}
+
+.ckeditor-accordion-toggle:before,.ckeditor-accordion-toggle:after {
+color: #534336!important;
+background: #534336!important;
+}
