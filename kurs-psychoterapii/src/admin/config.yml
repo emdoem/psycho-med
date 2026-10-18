@@ -1,0 +1,50 @@
+# Decap CMS configuration for kurs-psychoterapii.
+#
+# PLACEHOLDER: "REPLACE_ME/REPLACE_ME" below must be replaced by the owner
+# with the real GitHub repository in the form "owner/repo" (for example the
+# repository that hosts this site). Nothing works until this is set.
+#
+# GitHub backend requirement: the client needs a GitHub account with write
+# access to the repository, unless an OAuth proxy is used instead.
+# This is an OPEN DECISION (see ADR 0009) and is not resolved here.
+
+backend:
+  name: github
+  # PLACEHOLDER: set to "owner/repo" of the GitHub repository.
+  repo: REPLACE_ME/REPLACE_ME
+  branch: main
+  # PLACEHOLDER: only needed if an OAuth proxy is used (open decision, ADR 0009).
+  # Set to the URL of the OAuth proxy, or remove this line for the GitHub backend.
+  # base_url: https://REPLACE_ME.example.com
+  publish_mode: editorial_workflow
+
+media_folder: src/assets/img
+public_folder: /assets/img
+
+collections:
+  - name: pages
+    folder: src/pages
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, widget: string }
+      - { name: description, widget: text, required: false }
+      - { name: body, widget: markdown }
+
+  - name: announcements
+    folder: src/announcements
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { name: title, widget: string }
+      - { name: date, widget: datetime }
+      - { name: body, widget: markdown }
+
+  - name: editions
+    folder: src/editions
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, widget: string }
+      - { name: year, widget: string }
+      - { name: body, widget: markdown }

@@ -1,0 +1,29 @@
+/*
+ * Design tokens for kurs-psychoterapii.
+ *
+ * This file is shared with the main site for visual consistency.
+ * All values below are PROVISIONAL placeholders (neutral defaults).
+ * They are not final brand values. Final values depend on the
+ * outcome of ADR 0007 (proposed).
+ */
+:root {
+  /* Colors */
+  --color-text: #1a1a1a;
+  --color-background: #ffffff;
+  --color-link: #1a4fa0;
+  --color-link-visited: #5a3a8a;
+  --color-focus: #ffbf47;
+
+  /* Typography */
+  --font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-size-base: 1.125rem;
+  --line-height-base: 1.6;
+  --measure-prose: 40em;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+}

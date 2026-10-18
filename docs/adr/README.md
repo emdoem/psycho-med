@@ -14,6 +14,7 @@ Index of every ADR in this repository. The general plan lives at
 | [0006](0006-seo-metadata-and-analytics.md) | Minimal, hand-written SEO metadata and no analytics | accepted |
 | [0007](0007-warm-slate-typography-redesign.md) | Restyle the site in a warm slate and sand palette with a typography-led layout | proposed |
 | [0008](0008-home-page-as-entry-point.md) | Make the home page an entry point that links to the articles instead of printing them | accepted |
+| [0009](0009-static-site-generator-for-kurs-psychoterapii.md) | Static site generator for the kurs-psychoterapii site | proposed |
 
 ## Numbering
 
