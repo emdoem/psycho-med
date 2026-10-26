@@ -202,8 +202,16 @@ listing. That is a WordPress archive artifact, not an editorial order.
 - Body font: system sans stack (`"Helvetica Neue", Helvetica, Arial,
   sans-serif`). Links `#1982d1`. Headings black bold 16px in the legacy
   override.
-- **No images and no logo files were ever used** — branding is text only. No
-  images exist in `legacy/`, so none may be referenced.
+- **The legacy branding is text only.** No logo file was ever used, and
+  `legacy/psycho-med/` holds no images. Image files now exist elsewhere in
+  `legacy/`: `legacy/lenartowicza-crop-01.jpg` and the JPG files in the
+  `legacy/kurs-psychoterapii/` `_files` folder.
+- **The new site has text only, with one exception.** It uses one decorative
+  placeholder background photograph, `fundacja/assets/img/hero-lenartowicza.jpg`
+  (see [ADR 0010](../../../docs/adr/0010-adopt-option-c-bold-poster.md) and
+  [ADR 0013](../../../docs/adr/0013-site-under-fundacja-root-with-canonical-og-and-scaffolding-text.md)).
+  Its author and licence are unknown, and the image is not cleared for launch
+  (plan risks 9 and 10). Any other image needs a new ADR.
 - No forms, no comments, no sidebar, no widgets in the legacy site.
 
 ### Do not carry over
@@ -213,9 +221,11 @@ listing. That is a WordPress archive artifact, not an editorial order.
 - `Archiwum kategorii: …` headings.
 - `#comments` / `Odpowiedz` links (comments were already unused).
 - Empty `<p class="wp-block-paragraph"></p>` Gutenberg artifacts.
-- The Gmail-obfuscation markup (`span.gI > span.go` showing
-  `biuro.psychomed(at)gmail.com`) — use a plain `mailto:` with the real
-  address itemised above.
+- The Gmail-obfuscation markup, meaning the `span.gI > span.go` wrapper. Do not
+  reproduce the wrapper. The e-mail is shown as visible text
+  `biuro.psychomed(at)gmail.com`, and the real address `biuro.psychomed@gmail.com`
+  appears only in the `mailto:` href ([ADR 0012](../../../docs/adr/0012-email-shown-obfuscated-as-text.md)).
+  The visible `(at)` text itself is correct and is not a defect.
 - bbPress, emoji and Twenty Eleven theme assets.
 
 ### Settled decisions
@@ -223,14 +233,18 @@ listing. That is a WordPress archive artifact, not an editorial order.
 Reference these from ADRs instead of re-arguing them: plain HTML + CSS with no
 build step; page set and URL scheme; content reproduced verbatim with a single
 shared source for contact data; text-only legacy branding; static hosting; no
-tracking.
+tracking. Local links and assets are relative ([ADR 0014](../../../docs/adr/0014-relative-paths-for-local-links-and-assets.md)).
+Canonical URLs, `robots.txt` and `sitemap.xml` use the domain
+`http://fundacja-psychoterapia.pl` ([ADR 0013](../../../docs/adr/0013-site-under-fundacja-root-with-canonical-og-and-scaffolding-text.md)).
 
 ### Open questions
 
-Hosting provider; whether the e-mail is displayed as a `mailto:` or kept
-text-only; treatment of the legacy typos (`Kurs psychopterapii – zapisy`,
+Hosting provider; treatment of the legacy typos (`Kurs psychopterapii – zapisy`,
 `w dziecinie psychoterapii`); whether "Warto odwiedzić" also carries local
 descriptions of each link.
+
+The e-mail display is resolved by [ADR 0012](../../../docs/adr/0012-email-shown-obfuscated-as-text.md):
+visible text is obfuscated, and the real address appears only in `mailto:`.
 
 ## 7. Update workflow
 

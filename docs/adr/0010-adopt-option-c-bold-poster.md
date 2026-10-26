@@ -2,6 +2,7 @@
 
 - Status: accepted
 - Date: 2026-10-26
+- Amended by ADR 0013: the hero photograph is decorative and carries no alt text.
 - Supersedes: [ADR 0007](0007-warm-slate-typography-redesign.md) (palette and
   layout), which is marked superseded
 

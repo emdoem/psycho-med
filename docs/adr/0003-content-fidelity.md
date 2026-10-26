@@ -2,6 +2,7 @@
 
 - Status: accepted
 - Date: 2026-10-10
+- Note (2026-10-26): Open question on visible e-mail display resolved by [ADR 0012](0012-email-shown-obfuscated-as-text.md) (visible text obfuscated, real address only in `mailto:`).
 
 ## Context
 

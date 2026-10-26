@@ -1,6 +1,6 @@
 # ADR 0008: Make the home page an entry point that links to the articles instead of printing them
 
-- Status: accepted
+- Status: accepted, card body rule superseded by ADR 0011
 - Date: 2026-10-11
 
 ## Context

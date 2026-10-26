@@ -1,7 +1,8 @@
 # ADR 0002: Site information architecture
 
-- Status: accepted
+- Status: accepted (URL form superseded for local links by ADR 0014)
 - Date: 2026-10-10
+- Note (2026-10-26): local links are relative per [ADR 0014](0014-relative-paths-for-local-links-and-assets.md).
 
 ## Context
 

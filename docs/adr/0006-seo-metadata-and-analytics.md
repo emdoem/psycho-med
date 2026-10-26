@@ -24,8 +24,10 @@ Search-engine and sharing metadata is hand-written, static, and minimal.
   `<Page name> | Fundacja PSYCHOMED`.
 - Every page has `lang="pl-PL"`, a canonical link to its absolute URL, and
   Open Graph `og:title`, `og:description`, `og:type`, `og:url` and `og:locale`
-  tags. No `og:image`, because the site has no images
-  ([ADR 0004](0004-styling-and-accessibility.md)).
+  tags. No `og:image`: the foundation site has one decorative CSS background
+  photograph ([ADR 0010](0010-adopt-option-c-bold-poster.md),
+  [ADR 0013](0013-site-under-fundacja-root-with-canonical-og-and-scaffolding-text.md)),
+  and `og:image` is still not used ([ADR 0013](0013-site-under-fundacja-root-with-canonical-og-and-scaffolding-text.md), decision 3).
 - `robots.txt` allows crawling and points at `sitemap.xml`.
 - `sitemap.xml` lists the four pages with their absolute URLs, written by hand
   and updated when a page is added. A generator would be the only automated
