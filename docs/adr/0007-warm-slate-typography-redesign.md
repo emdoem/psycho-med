@@ -1,6 +1,6 @@
 # ADR 0007: Restyle the site in a warm slate and sand palette with a typography-led layout
 
-- Status: proposed
+- Status: superseded by ADR 0010
 - Date: 2026-10-11
 - Replaces: [ADR 0004](0004-styling-and-accessibility.md), which is marked
   rejected

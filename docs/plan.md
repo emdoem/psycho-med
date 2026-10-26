@@ -1,6 +1,6 @@
 # Psycho-med — general plan
 
-_Last updated: 2026-10-11_
+_Last updated: 2026-10-26_
 
 ## Overview
 
@@ -39,7 +39,7 @@ must not require a database, a PHP process or a build toolchain.
 - Any JavaScript requirement for reading the site.
 - A translation layer or locale switching.
 - A visual redesign of the archive pages beyond the palette and layout of
-  [ADR 0007](adr/0007-warm-slate-typography-redesign.md). The landing page is
+  [ADR 0010](adr/0010-adopt-option-c-bold-poster.md). The landing page is
   redesigned; the three article pages are ported with the same tokens and no
   further styling of their own.
 - Migrating the legacy URLs (`?cat=6`, `?p=32`, …) — those served a WordPress
@@ -71,8 +71,10 @@ Details and reasoning live in the ADRs:
 | [0004](adr/0004-styling-and-accessibility.md) | Styling follows the legacy text-only branding, made responsive and accessible | rejected by [0007](adr/0007-warm-slate-typography-redesign.md) |
 | [0005](adr/0005-hosting-and-deployment.md) | Hosting and deployment | accepted |
 | [0006](adr/0006-seo-metadata-and-analytics.md) | SEO, metadata and analytics | accepted |
-| [0007](adr/0007-warm-slate-typography-redesign.md) | Warm slate and sand palette, typography-led layout | accepted |
+| [0007](adr/0007-warm-slate-typography-redesign.md) | Warm slate and sand palette, typography-led layout | superseded by [0010](adr/0010-adopt-option-c-bold-poster.md) |
 | [0008](adr/0008-home-page-as-entry-point.md) | Home page as an entry point linking to the articles | accepted |
+| [0009](adr/0009-static-site-generator-for-kurs-psychoterapii.md) | Static site generator for the kurs-psychoterapii site | proposed |
+| [0010](adr/0010-adopt-option-c-bold-poster.md) | Bold poster direction (option C) with a placeholder hero photograph | accepted |
 
 ## Content source of truth
 
@@ -107,16 +109,17 @@ the archived text wins.
     └── css/style.css      # single stylesheet for all pages
 ```
 
-`mockup/` holds three self-contained landing-page mock-ups, each one file with
-its own `<style>` and no asset to open: `option-a.html` (warm slate and sand,
-card grid, dark bands — the leading recommendation in
-[ADR 0007](adr/0007-warm-slate-typography-redesign.md)), `option-b.html`
-(light, squared, hairline rules, institutional blue, left rail) and
-`option-c.html` (bold poster, vermilion, monospaced labels, numbered index).
-They exist so the palette and the layout can be chosen together rather than
-argued about; none is a decision until the client picks one. They are not part
-of the deployed site and carry no analytics, no canonical link and no Open Graph
-tags, since those hard-code a domain that is not chosen yet
+`mockup/` holds the landing-page mock-ups. Option C was chosen
+([ADR 0010](adr/0010-adopt-option-c-bold-poster.md)), and `option-c2.html` is the
+reference for the production landing page. It adds a placeholder hero photograph
+at `mockup/assets/hero-lenartowicza.jpg`, a copy of
+`legacy/lenartowicza-crop-01.jpg` (441x248 px). `option-a.html` (warm slate and
+sand, card grid, superseded [ADR 0007](adr/0007-warm-slate-typography-redesign.md))
+and `option-b.html` (light, squared, hairline rules, institutional blue, left
+rail) are kept for reference only, and `option-c.html` (bold poster, vermilion,
+monospaced labels, numbered index) is the same design without the photograph.
+They are not part of the deployed site and carry no analytics, no canonical link
+and no Open Graph tags, since those hard-code a domain that is not chosen yet
 ([ADR 0006](adr/0006-seo-metadata-and-analytics.md), risk 1).
 
 Shared header and footer are repeated in each page by hand. Each page is small;
@@ -125,12 +128,12 @@ rejects that.
 
 ## Milestones
 
-1. **Mock-up** — `mockup/option-a.html`, `option-b.html` and `option-c.html`,
-   each one self-contained file with its own `<style>`, no assets, no
-   JavaScript. Three palettes and three layouts so the client can pick one.
-   The record of the choice is a new ADR, and
-   [ADR 0007](adr/0007-warm-slate-typography-redesign.md) stays `proposed`
-   until then.
+1. **Mock-up** - `mockup/option-a.html`, `option-b.html` and `option-c.html`,
+   each one self-contained file with its own `<style>` and no JavaScript.
+   Option C was chosen ([ADR 0010](adr/0010-adopt-option-c-bold-poster.md));
+   `mockup/option-c2.html` is the reference and adds the placeholder photograph
+   in `mockup/assets/`. [ADR 0007](adr/0007-warm-slate-typography-redesign.md)
+   is superseded.
 2. **Scaffold** — directory layout, `assets/css/style.css` carrying the chosen
    mock-up's rules, shared header and footer markup for all four pages.
 3. **Na temat fundacji** — port the six paragraphs. Smallest page, ported first
@@ -158,6 +161,9 @@ rejects that.
 | 6 | WordPress permalinks will break. Redirects depend on the hosting choice (item 1). | blocked by item 1 |
 | 7 | The landing page carries the hero lead and the card blurbs as verbatim fragments, plus six labels derived from archive words (`Fundacja · Kraków`, the three facts captions, the two card eyebrows). They read slightly less fluently than purpose-written copy. | open, see [ADR 0008](adr/0008-home-page-as-entry-point.md) |
 | 8 | `Kurs psychoterapii – kryteria przyjęcia` and `Kurs psychopterapii – zapisy` are the archive titles behind the home page's `#kryteria` and `#zapisy` links. The link labels use `Kryteria przyjęcia` and `Zapisy`; the archived titles, typo included, stay on the course page. | resolved: labels only |
+| 9 | The hero photograph (mockup/assets/hero-lenartowicza.jpg, from legacy/lenartowicza-crop-01.jpg) has an unknown author and licence and may not show the foundation's building. Confirm with the client before launch. | open, see [ADR 0010](adr/0010-adopt-option-c-bold-poster.md) |
+| 10 | The photograph is 441x248 px, too small for a full-width hero on high-density screens. Obtain a larger licensed image. | open, see [ADR 0010](adr/0010-adopt-option-c-bold-poster.md) |
+| 11 | The archive is no longer image-free: legacy/ contains image files. The project-docs skill (section 6) and ADR 0006 (no og:image) still say there are no images and must be revisited. | open, see [ADR 0010](adr/0010-adopt-option-c-bold-poster.md) |
 
 ## ADR index
 
