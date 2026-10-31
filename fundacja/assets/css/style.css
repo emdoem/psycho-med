@@ -25,7 +25,7 @@ body{
   line-height:1.6;
 }
 h1,h2,h3{margin:0;line-height:1.05;letter-spacing:-.035em}
-p{margin:0 0 1em}
+p{margin:0}
 p:last-child{margin-bottom:0}
 ul{margin:0;padding:0;list-style:none}
 a{color:var(--accent);text-decoration:none}
@@ -126,6 +126,7 @@ a:hover{color:var(--accent-ink);text-decoration:underline}
   margin:clamp(2.25rem,5vw,3.25rem) 0 0;
   border-top:var(--border) solid var(--rule);
 }
+.facts dt,.facts dd{margin:0}
 .facts__row{
   display:flex;
   flex-direction:column;
@@ -258,5 +259,10 @@ a:hover{color:var(--accent-ink);text-decoration:underline}
   line-height:1.75;
   color:var(--ink);
 }
-.prose p{margin:0 0 1.1em}
+.prose p{margin:0}
+section.prose{margin:0 0 clamp(2.5rem,5vw,3.5rem)}
 .prose strong{font-weight:700}
+.prose h2{margin:0 0 .9em}
+.prose ul{list-style:disc outside;padding-left:1.5em;margin:0 0 1.25em}
+.prose li{margin:0 0 .35em}
+.prose li:last-child{margin-bottom:0}
