@@ -1,0 +1,8 @@
+{
+  "name": "psycho-med",
+  "private": true,
+  "description": "Workspace root",
+  "scripts": {
+    "package:portable": "node scripts/package-portable.js"
+  }
+}
