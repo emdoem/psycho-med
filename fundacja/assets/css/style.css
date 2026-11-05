@@ -70,7 +70,7 @@ a:hover{color:var(--accent-ink);text-decoration:underline}
   padding:0;
   color:var(--cream);
   background-color:var(--ink);
-  background-image:linear-gradient(rgba(20,17,14,.80),rgba(20,17,14,.80)),url("../img/hero-lenartowicza.jpg");
+  background-image:linear-gradient(rgba(20,17,14,.80),rgba(20,17,14,.80)),url("../img/hero-lubelska.jpg");
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
