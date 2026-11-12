@@ -1,5 +1,6 @@
 ---
 title: "Lublin - calosciowy kurs psychoterapii"
+year: "" # TODO: year not stated in source; body says last edition 2022/24 - 2025/26; owner to set
 ---
 
 Fundacja "Psychomed" organizowała w Lublinie czteroletnie, całościowe szkolenie w psychoterapii.

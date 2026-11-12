@@ -13,10 +13,12 @@ Which parts of the site are developer-owned, which the client edits in Decap
 
 IDs used above (from the source page inventory): C1 = home page intro, C2 = recruitment banner, C4 = duplicate intro, C5 = recruitment banner link. C3 is not referenced here.
 
+**Field note - downloadable files (`src/assets/files/`):** these files (currently the recruitment questionnaire `ankieta_rekrutacja.doc`, `.zip`, `.docx`, linked from `src/editions/rekrutacja_2026_27.md`) are client-replaceable and time-specific: replace them when the form changes. Decap has no media collection for this folder yet (`media_folder` is `src/assets/img`), so replacement is done through the repository until one is added. Each link keeps the original live URL in an HTML comment.
+
 ## Open decisions
 
 - **Duplicate intro (C4):** "Studia i kurs całościowy przygotowujący do uzyskania certyfikatu psychoterapeuty Polskiego Towarzystwa Psychiatrycznego" repeats C1. Not migrated; owner to confirm.
-- **Route placeholder:** the intro link to `/node/33` points to `#TODO-route` until the route is decided.
+- **Route placeholder:** `node/33` (programme page, intro link on the home page) and `node/43` (superwizja page) are resolved. `node/31` (Zgrupowania dydaktyczno-treningowe) and `node/55` (Grupa Balinta) remain open and are being fetched (see `PLAN.md` Phase 2); their links point to `#TODO-route` until then.
 - **Announcement date:** the source has no date; the owner must set it in Decap.
 - **Banner alt text:** the source has none; the owner must decide (currently `alt=""`).
 - **Editorial workflow / OAuth:** see `README.md`; client access to Decap is still open.

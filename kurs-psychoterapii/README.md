@@ -29,6 +29,7 @@ npm run build # build static site into _site/
 - `src/editions/` - course editions and schedules (`/edycje/`)
 - `src/assets/css/` - `tokens.css` (design tokens, shared with the main site) and `site.css`
 - `src/assets/img/` - images (uploaded through the CMS)
+- `src/assets/files/` - downloadable files (currently the recruitment questionnaire). These are time-specific and client-replaceable: replace them when the form changes. Decap has no collection for this folder yet.
 - `src/admin/` - Decap CMS admin UI (`/admin/`) and `config.yml`
 
 ## Client editing

@@ -22,7 +22,7 @@ Adres do przesyłania zgłoszeń:
 Informujemy, że rozpatrywane będą jedynie kompletne zgłoszenia zawierające:
 
 1. Własnoręcznie podpisane **podanie o przyjęcie na kurs**.
-2. Wypełnioną i własnoręcznie podpisaną **ankietę osobową** ([doc](#TODO-route)<!-- TODO: original URL https://www.kurs-psychoterapii.pl/zasoby/ankieta_rekrutacja.doc -->/[zip](#TODO-route)<!-- TODO: original URL https://www.kurs-psychoterapii.pl/zasoby/ankieta_rekrutacja.zip -->/[docx](#TODO-route)<!-- TODO: original URL https://www.kurs-psychoterapii.pl/zasoby/ankieta_rekrutacja.docx -->).
+2. Wypełnioną i własnoręcznie podpisaną **ankietę osobową** ([doc](/assets/files/ankieta_rekrutacja.doc)<!-- original URL https://www.kurs-psychoterapii.pl/zasoby/ankieta_rekrutacja.doc -->/[zip](/assets/files/ankieta_rekrutacja.zip)<!-- original URL https://www.kurs-psychoterapii.pl/zasoby/ankieta_rekrutacja.zip -->/[docx](/assets/files/ankieta_rekrutacja.docx)<!-- original URL https://www.kurs-psychoterapii.pl/zasoby/ankieta_rekrutacja.docx -->).
 3. **Dwa** dokumenty związane z **upoważnieniem do przetwarzania danych osobowych** ([RODO 1, ](https://docs.google.com/document/d/1xz_vSquqzOKkzdwiCk5T9iz_ZS3EbDCUxRGFFhBSExk/edit?usp=sharing)[RODO 2)](https://drive.google.com/file/d/1RETxTpeFhSMlHBdYg_R16nuv6fEbwl8L/view?usp=drive_link)
 4. Potwierdzenie wpłaty należności za udział w postępowaniu rekrutacyjnym - 200 PLN płatne przelewem na konto Fundacji „Psychomed”.<br>(PKO BP I Oddział w Krakowie; 20 1020 2892 0000 5102 0153 0997). Jeżeli życzą sobie Państwo FV z numerem NIP, prosimy o kontakt z P. Katarzyną Matuszkiewicz pod adresem mailowym: [biuro.psychomed(at)gmail.com](mailto:biuro.psychomed@gmail.com)
 5. Kopię dyplomu lekarza/magistra.
