@@ -15,17 +15,18 @@ Index of every ADR in this repository. The general plan lives at
 | [0007](0007-warm-slate-typography-redesign.md) | Restyle the site in a warm slate and sand palette with a typography-led layout | superseded by ADR 0010 |
 | [0008](0008-home-page-as-entry-point.md) | Make the home page an entry point that links to the articles instead of printing them | accepted, card body rule superseded by ADR 0011 |
 | [0009](0009-static-site-generator-for-kurs-psychoterapii.md) | Static site generator for the kurs-psychoterapii site | proposed |
-| [0010](0010-adopt-option-c-bold-poster.md) | Adopt the bold poster direction (option C) for the landing page, with a placeholder hero photograph | accepted |
+| [0010](0010-adopt-option-c-bold-poster.md) | Adopt the bold poster direction (option C) for the landing page, with a placeholder hero photograph | accepted (hero treatment under review in ADR 0016) |
 | [0011](0011-home-card-body-any-verbatim-sentence.md) | Home page cards may quote any verbatim sentence from the article | accepted |
 | [0012](0012-email-shown-obfuscated-as-text.md) | Show the e-mail address obfuscated as text, with the real address only in mailto: | accepted |
 | [0013](0013-site-under-fundacja-root-with-canonical-og-and-scaffolding-text.md) | Build the site under fundacja/ with the domain http://fundacja-psychoterapia.pl, canonical and Open Graph tags, and the archived scaffolding text | accepted (decision 1 on root-absolute paths superseded by ADR 0014) |
 | [0014](0014-relative-paths-for-local-links-and-assets.md) | Use relative paths for all local links and assets | accepted |
 | [0015](0015-accept-archived-titles-and-labels-as-scaffolding-text.md) | Accept the archived page titles and link labels as scaffolding text | accepted |
+| [0016](0016-light-hero-with-white-translucent-mask.md) | Use a light hero with a white translucent mask and dark type on the landing page (amends the hero treatment of ADR 0010) | proposed |
 
 ## Numbering
 
 Numbers are zero-padded to four digits and allocated sequentially — the next ADR
-is `0016`. Numbers are never reused or renumbered. A superseded decision keeps
+is `0017`. Numbers are never reused or renumbered. A superseded decision keeps
 its number and is marked `superseded by ADR NNNN`; the replacing ADR is written
 fresh.
 

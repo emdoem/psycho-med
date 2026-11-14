@@ -3,6 +3,9 @@
 - Status: accepted
 - Date: 2026-10-26
 - Amended by ADR 0013: the hero photograph is decorative and carries no alt text.
+- Hero treatment under review: [ADR 0016](0016-light-hero-with-white-translucent-mask.md)
+  (proposed) replaces the hero colours and overlay in the production CSS with a
+  light treatment. This ADR's status is unchanged until ADR 0016 is decided.
 - Supersedes: [ADR 0007](0007-warm-slate-typography-redesign.md) (palette and
   layout), which is marked superseded
 
