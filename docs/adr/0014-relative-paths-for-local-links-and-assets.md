@@ -22,7 +22,7 @@ Local links and assets are relative to the file that contains them:
 - page links: `href="index.html"`, `href="kursy-doskonalace.html#zapisy"`;
 - stylesheet and icon: `href="assets/css/style.css"`, `href="favicon.svg"`;
 - CSS images: `url()` is relative to the stylesheet, for example
-  `url("../img/hero-lenartowicza.jpg")` in `assets/css/style.css`.
+  `url("../img/hero-lubelska.jpg")` in `assets/css/style.css`.
 
 Absolute URLs on the domain `http://fundacja-psychoterapia.pl` stay absolute.
 These are the canonical links, `og:url`, `robots.txt` and `sitemap.xml`.

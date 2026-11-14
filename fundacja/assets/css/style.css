@@ -63,13 +63,66 @@ a:hover{color:var(--accent-ink);text-decoration:underline}
 .bar__nav a{color:var(--ink-soft);font-weight:700}
 .bar__nav a:hover{color:var(--accent);text-decoration:none}
 .bar__nav a[aria-current="page"]{color:var(--accent)}
+.bar__toggle,.bar__menu-btn{display:none}
 @media (max-width:40rem){
-  .bar__inner{padding-top:.6rem;padding-bottom:.6rem}
+  .bar{position:relative}
+  .bar__inner{align-items:center;padding-top:.25rem;padding-bottom:.25rem}
   .bar__brand{font-size:.9rem;letter-spacing:.12em;padding:.2rem 0;margin:-.2rem 0}
-  .bar__nav{gap:.4rem .6rem;font-size:.85rem}
-  .bar__nav li{gap:.4rem}
-  .bar__nav li:last-child{gap:0}
-  .bar__nav a{padding:.2rem 0;margin:-.2rem 0}
+  .bar__toggle{
+    display:block;
+    position:absolute;
+    width:1px;
+    height:1px;
+    margin:-1px;
+    padding:0;
+    overflow:hidden;
+    clip:rect(0 0 0 0);
+    border:0;
+    white-space:nowrap;
+  }
+  .bar__menu-btn{
+    display:flex;
+    align-items:center;
+    min-height:2.75rem;
+    margin-left:auto;
+    padding:0 .9rem;
+    border:var(--border) solid var(--ink);
+    font-family:var(--mono);
+    font-size:.75rem;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .bar__menu-btn:hover{background:var(--cream)}
+  #nav-toggle:checked + .bar__menu-btn{background:var(--ink);color:var(--paper)}
+  #nav-toggle:focus-visible{outline:none}
+  #nav-toggle:focus-visible + .bar__menu-btn{outline:var(--border) solid var(--accent);outline-offset:2px}
+  .bar__menu{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    z-index:10;
+    background:var(--paper);
+    border-top:var(--border) solid var(--rule);
+    border-bottom:var(--border) solid var(--rule);
+  }
+  #nav-toggle:checked ~ .bar__menu{display:block}
+  .bar__nav{display:block;font-size:1rem}
+  .bar__nav li{display:block}
+  .bar__nav li::after{content:none}
+  .bar__nav li + li{border-top:1px solid var(--hair)}
+  .bar__nav a{
+    display:flex;
+    align-items:center;
+    min-height:2.75rem;
+    padding:.6rem clamp(1.25rem,4vw,2.5rem);
+    color:var(--ink);
+  }
+  .bar__nav a[aria-current="page"]{box-shadow:inset var(--border) 0 0 var(--accent)}
 }
 
 .content{max-width:var(--measure);margin-inline:auto;padding-inline:clamp(1.25rem,4vw,2.5rem)}
@@ -88,7 +141,7 @@ a:hover{color:var(--accent-ink);text-decoration:underline}
 .hero :focus-visible{outline-color:var(--ink)}
 .hero__title{
   margin:.85rem 0 1.25rem;
-  font-size:clamp(1.5rem,.7rem + 4.5vw,3.2rem);
+  font-size:clamp(1.25rem,min(max(.75rem + 2.5vw,10vw - 1.5rem),.7rem + 4.5vw),3.2rem);
   font-weight:700;
   text-transform:uppercase;
   letter-spacing:-.045em;
@@ -273,3 +326,56 @@ section.prose{margin:0 0 clamp(2.5rem,5vw,3.5rem)}
 .prose ul{list-style:disc outside;padding-left:1.5em;margin:0 0 1.25em}
 .prose li{margin:0 0 .35em}
 .prose li:last-child{margin-bottom:0}
+
+/* Mobile tightening (<=40rem only). Overrides the base rules above; desktop untouched. */
+@media (max-width:40rem){
+  /* side gutter: content, bar row, nav panel rows and footer share one value so edges stay aligned */
+  .content{padding-inline:1rem}
+  .bar__inner,.bar__nav a{padding-inline:1rem}
+  .footer__inner,.footer__bottom{padding-inline:1rem}
+
+  /* hero */
+  .hero__inner{padding-top:1.75rem;padding-bottom:1.75rem}
+  .hero__title{margin:.6rem 0 .85rem}
+  .hero__lead{margin:1.1rem 0 0;padding:.8rem 0 .8rem 1.1rem}
+  .hero__actions{margin-top:1.25rem;gap:.4rem;flex-wrap:wrap}
+  .btn{
+    flex:1 1 auto;
+    padding:.5rem;
+    border-width:2px;
+    font-size:.8rem;
+    letter-spacing:.02em;
+    text-align:center;
+    white-space:nowrap;
+  }
+  .facts{margin-top:1rem}
+  .facts__row{padding:.5rem 0;gap:.15rem}
+  .facts__value{font-size:max(calc(.625rem + 2.5vw),calc(6.875vw - .6875rem));line-height:1.1}
+  .facts__label{line-height:1.4}
+
+  /* index, strip, inner pages */
+  .section{padding-top:1.75rem}
+  .index{margin-top:1rem}
+  .index__link{grid-template-columns:3rem 1fr auto;gap:0 .75rem;padding:1.1rem .6rem}
+  .index__body{padding:0 .6rem 1rem}
+  .strip{gap:1rem;margin-top:1rem}
+  .strip__cell{padding:1rem}
+  .strip__val a{overflow-wrap:anywhere}
+  .strip__title{margin:.4rem 0 .6rem}
+  .page-head{padding-top:1.75rem;margin-bottom:1.25rem}
+  .page-head h1{margin-bottom:1rem}
+  section.prose{margin-bottom:1.75rem}
+  .prose ul{margin-bottom:1em;padding-left:1.25em}
+
+  /* footer */
+  .footer{margin-top:1.75rem}
+  .footer__inner{gap:1.5rem;padding-top:1.5rem;padding-bottom:1.5rem}
+  .footer__name{margin-bottom:.5rem}
+  .footer__title{margin-bottom:.5rem}
+  .footer__bottom{padding-top:.75rem;padding-bottom:1rem}
+}
+
+/* Hero buttons share one row only when the row fits with >=5% spare (viewport >= 24.25rem = 388px). */
+@media (min-width:24.25rem) and (max-width:40rem){
+  .hero__actions{flex-wrap:nowrap}
+}

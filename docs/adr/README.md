@@ -22,11 +22,13 @@ Index of every ADR in this repository. The general plan lives at
 | [0014](0014-relative-paths-for-local-links-and-assets.md) | Use relative paths for all local links and assets | accepted |
 | [0015](0015-accept-archived-titles-and-labels-as-scaffolding-text.md) | Accept the archived page titles and link labels as scaffolding text | accepted |
 | [0016](0016-light-hero-with-white-translucent-mask.md) | Use a light hero with a white translucent mask and dark type on the landing page (amends the hero treatment of ADR 0010) | proposed |
+| [0017](0017-css-only-mobile-menu-dropdown.md) | Collapse the navigation into a CSS-only dropdown below 40rem | proposed |
+| [0018](0018-mobile-spacing-and-shared-gutter.md) | Tighten spacing below 40rem with one shared 1rem side gutter | accepted |
 
 ## Numbering
 
 Numbers are zero-padded to four digits and allocated sequentially — the next ADR
-is `0017`. Numbers are never reused or renumbered. A superseded decision keeps
+is `0019`. Numbers are never reused or renumbered. A superseded decision keeps
 its number and is marked `superseded by ADR NNNN`; the replacing ADR is written
 fresh.
 
