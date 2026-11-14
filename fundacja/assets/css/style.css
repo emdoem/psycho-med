@@ -379,3 +379,26 @@ section.prose{margin:0 0 clamp(2.5rem,5vw,3.5rem)}
 @media (min-width:24.25rem) and (max-width:40rem){
   .hero__actions{flex-wrap:nowrap}
 }
+
+.na_temat_fundacji {
+    background-image:linear-gradient(rgba(255,255,255,.65),rgba(255,255,255,.65)),url("../img/gabinet-01.jpg");
+
+}
+.kursy_doskonalace {
+    background-image:linear-gradient(rgba(255,255,255,.65),rgba(255,255,255,.65)),url("../img/kurs-01.jpg");
+
+}
+.na_temat_fundacji,
+.kursy_doskonalace {
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+/* iOS Safari ignores background-attachment: fixed; fall back to scroll so the cover image still renders. */
+@supports (-webkit-touch-callout: none) {
+    .na_temat_fundacji,
+    .kursy_doskonalace {
+        background-attachment:scroll;
+    }
+}
