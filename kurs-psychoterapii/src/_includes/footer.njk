@@ -1,3 +1,26 @@
-<footer>
-  <!-- TODO: footer content pending migration -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <p class="footer__name">{{ org.name }}</p>
+      <p class="footer__meta">
+        {{ org.fullName }}<br>
+        {{ org.patron }}<br>
+        {{ org.address }}<br>
+        {{ org.identifiers }}<br>
+        <a href="mailto:{{ org.email }}">{{ org.emailShown }}</a>
+      </p>
+      <p class="footer__meta"><a href="{{ nav.foundation.url }}" rel="noopener">{{ nav.foundation.label }}</a></p>
+    </div>
+    {% for col in nav.footer %}
+    <nav aria-labelledby="footer-col-{{ loop.index }}">
+      <h2 class="footer__title" id="footer-col-{{ loop.index }}">{{ col.title }}</h2>
+      <ul class="footer__list">
+        {% for item in col.items %}
+        <li><a href="{{ item.url }}"{% if item.external %} rel="noopener"{% endif %}>{{ item.label }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+    {% endfor %}
+  </div>
+  <p class="footer__bottom">{{ org.copyright }}</p>
 </footer>

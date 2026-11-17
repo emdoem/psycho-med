@@ -1,3 +1,17 @@
-<header>
-  <!-- TODO: header content pending migration -->
+<header class="bar">
+  {% set section = nav.sectionFor[page.url] %}
+  <div class="bar__inner">
+    <a class="bar__brand" href="{{ nav.home.url }}" rel="home"{% if page.url == nav.home.url %} aria-current="page"{% endif %}>{{ site.name }}</a>
+    <input class="bar__toggle" type="checkbox" id="nav-toggle" autocomplete="off">
+    <label class="bar__menu-btn" for="nav-toggle">Menu</label>
+    <nav class="bar__menu" aria-label="Menu główne">
+      <ul class="bar__nav">
+        {% for item in nav.header %}
+        <li{% if section and section.key == item.key %} class="is-section"{% endif %}>
+          <a href="{{ item.url }}"{% if item.url == page.url %} aria-current="page"{% endif %}>{{ item.label }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
 </header>

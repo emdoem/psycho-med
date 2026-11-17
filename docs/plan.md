@@ -1,6 +1,6 @@
 # Psycho-med — general plan
 
-_Last updated: 2026-11-14_
+_Last updated: 2026-11-17_
 
 ## Overview
 
@@ -15,7 +15,9 @@ stable: three articles of substance plus contact, legal and bank details.
 
 The new site must carry that content forward, unchanged, in a form that is
 cheap to host, trivial to maintain, and readable on a phone. Publishing a page
-must not require a database, a PHP process or a build toolchain.
+must not require a database, a PHP process or a build toolchain. This applies
+to the main site ([ADR 0001](adr/0001-plain-html-css.md)). The kurs-psychoterapii
+site is a separate site built with Eleventy ([ADR 0009](adr/0009-static-site-generator-for-kurs-psychoterapii.md)).
 
 ## Goals
 
@@ -83,6 +85,7 @@ Details and reasoning live in the ADRs:
 | [0016](adr/0016-light-hero-with-white-translucent-mask.md) | Light hero with a white translucent mask and dark type on the landing page, amending the hero treatment of ADR 0010 | proposed (implementation drift open, risk 18) |
 | [0017](adr/0017-css-only-mobile-menu-dropdown.md) | CSS-only dropdown menu for the navigation below 40rem, with no JavaScript | proposed |
 | [0018](adr/0018-mobile-spacing-and-shared-gutter.md) | Below 40rem, tighter site-wide spacing with one shared 1rem side gutter; hero specifics in ADR 0016 | accepted |
+| [0019](adr/0019-kurs-site-copies-fundacja-design-tokens.md) | kurs-psychoterapii copies the fundacja design tokens (no shared file), ports its components, and keeps data-driven navigation; root-absolute links are a known deviation from ADR 0014 | proposed |
 
 ## Content source of truth
 
@@ -143,7 +146,12 @@ The mock-ups are not changed.
 
 Shared header and footer are repeated in each page by hand. Each page is small;
 the alternative is a templating step, and [ADR 0001](adr/0001-plain-html-css.md)
-rejects that.
+rejects that for the main site.
+
+The kurs-psychoterapii site (`kurs-psychoterapii/`) is not part of this layout.
+It is built with Eleventy ([ADR 0009](adr/0009-static-site-generator-for-kurs-psychoterapii.md)).
+Its design tokens are a copy of `fundacja/assets/css/style.css` lines 1 to 15,
+kept in sync by hand ([ADR 0019](adr/0019-kurs-site-copies-fundacja-design-tokens.md)).
 
 ## Milestones
 
@@ -210,8 +218,15 @@ rejects that.
        the same 16px sides;
      - the hero accent colour (risk 18): the brand word and fact values use the
       colour the client chooses;
-    and the photograph's file size (risk 15). The agents did not render it in a
-    browser.
+     and the photograph's file size (risk 15). The agents did not render it in a
+     browser.
+10. [x] **Kurs-psychoterapii UI (2026-11-17)** — the kurs site takes the fundacja
+    look: copied tokens, ported components, header and footer generated from
+    `kurs-psychoterapii/src/_data/nav.js`, and a light home hero. The decisions
+    and known deviations are in [ADR 0019](adr/0019-kurs-site-copies-fundacja-design-tokens.md).
+    Review fixes are in `kurs-psychoterapii/PLAN.md`. Open owner items there
+    include the ASCII-transliterated titles (K-68) and the root-absolute link
+    deviation (K-65).
 
 ## Risks and open questions
 
@@ -237,6 +252,8 @@ rejects that.
 | 18 | **OPEN, needs a client decision: implementation drift in the hero accent colour.** [ADR 0016](adr/0016-light-hero-with-white-translucent-mask.md) decides that `.hero__brand` and `.hero .facts__value` use `--accent-deep` `#6b2410` (4.58:1 on the worst-case `#a6a6a6`). The working copy uses `var(--accent)` `#c2410c` instead, at about lines 153 and 156 of `style.css`, apparently a user hand edit. `--accent-deep` is declared on `.hero` but not used. `--accent` on `#a6a6a6` is about 2.13:1, which fails AA and the 3:1 large-text threshold. On `#d2d2d2` it is about 3.42:1. Choose one: restore `--accent-deep` as decided, or amend ADR 0016 to accept `--accent` and its contrast. Status stays `proposed` until then. Additional reason for `--accent-deep`, from the 2026-11-14 facts compaction (ADR 0016): the fact values now run from 18px at 320px to 33px at 640px. Below about 346px they are normal text, not large text, and need 4.5:1. `--accent-deep` gives 4.58:1 on the worst case, which passes; `--accent` gives 2.13:1, and on the mid-grey pixel it passes only the 3:1 large-text threshold. | open, needs client decision |
 | 19 | The mobile navigation is now a CSS-only dropdown below 40rem, decided in [ADR 0017](adr/0017-css-only-mobile-menu-dropdown.md). The links sit behind a "Menu" button (a checkbox and a label, no JavaScript), and the panel is a full-width overlay under the bar. The header is about 55px tall at 320px, 360px and 390px (estimate, not measured in a browser), down from about 102px after the 2026-11-14 wrap compaction. That compaction is removed. Desktop is unchanged. Trade-offs, recorded in ADR 0017: screen readers announce a checkbox with no expanded state; Space toggles and Enter does not; Escape and tap-outside do not close the panel; the brand link is about 30px tall, below the 44px target. The earlier nits no longer apply in the same form: below 40rem the `/` separators are removed, and the focus ring is on the button. Both are re-checked in milestone 9. | open, proposed with ADR 0017, verify in milestone 9 |
 | 20 | The hero button row boundary is estimated with Arial Bold metrics. The row fits from about 370px, and the CSS puts it on one row from 388px (`style.css` line 376). The CSS comment says 388px keeps 5% spare, which is why it overstates the boundary. This is a comment nit in the code, not changed here. Helvetica Neue on iOS may wrap earlier than either figure. ADR 0016 records the behaviour. | open, verify in milestone 9 |
+| 21 | The kurs-psychoterapii site uses root-absolute local links (`/assets/...`, `/edycje/...`), a known deviation from [ADR 0014](adr/0014-relative-paths-for-local-links-and-assets.md) for that site only ([ADR 0019](adr/0019-kurs-site-copies-fundacja-design-tokens.md)). Owner decision tracked as K-65 in `kurs-psychoterapii/PLAN.md`. | open, owner decision |
+| 22 | The kurs-psychoterapii design tokens are a copy of fundacja `style.css` lines 1 to 15. Nothing checks that they match. A token change made in fundacja and not copied drifts silently. ADR 0019 makes the copy a review rule. | open, review rule only |
 
 ## ADR index
 

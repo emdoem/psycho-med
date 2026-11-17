@@ -1,29 +1,18 @@
 /*
- * Design tokens for kurs-psychoterapii.
- *
- * This file is shared with the main site for visual consistency.
- * All values below are PROVISIONAL placeholders (neutral defaults).
- * They are not final brand values. Final values depend on the
- * outcome of ADR 0007 (proposed).
+ * Design tokens: copied from fundacja/assets/css/style.css :1-15; keep in sync; ADR 0010.
  */
-:root {
-  /* Colors */
-  --color-text: #1a1a1a;
-  --color-background: #ffffff;
-  --color-link: #1a4fa0;
-  --color-link-visited: #5a3a8a;
-  --color-focus: #ffbf47;
-
-  /* Typography */
-  --font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  --font-size-base: 1.125rem;
-  --line-height-base: 1.6;
-  --measure-prose: 40em;
-
-  /* Spacing */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 2rem;
-  --space-xl: 3rem;
+:root{
+  --paper:#ffffff;
+  --ink:#14110e;
+  --ink-soft:#4a443d;
+  --rule:#14110e;
+  --hair:#d8d2c8;
+  --accent:#c2410c;
+  --accent-ink:#9a3412;
+  --accent-lift:#ea580c;
+  --cream:#f5f1e8;
+  --font:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono","Segoe UI Mono",Consolas,"Courier New",monospace;
+  --measure:64rem;
+  --border:3px;
 }

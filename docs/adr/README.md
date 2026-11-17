@@ -24,11 +24,12 @@ Index of every ADR in this repository. The general plan lives at
 | [0016](0016-light-hero-with-white-translucent-mask.md) | Use a light hero with a white translucent mask and dark type on the landing page (amends the hero treatment of ADR 0010) | proposed |
 | [0017](0017-css-only-mobile-menu-dropdown.md) | Collapse the navigation into a CSS-only dropdown below 40rem | proposed |
 | [0018](0018-mobile-spacing-and-shared-gutter.md) | Tighten spacing below 40rem with one shared 1rem side gutter | accepted |
+| [0019](0019-kurs-site-copies-fundacja-design-tokens.md) | Copy the fundacja design tokens and port its components into kurs-psychoterapii, with a sync rule and data-driven navigation | proposed |
 
 ## Numbering
 
 Numbers are zero-padded to four digits and allocated sequentially — the next ADR
-is `0019`. Numbers are never reused or renumbered. A superseded decision keeps
+is `0020`. Numbers are never reused or renumbered. A superseded decision keeps
 its number and is marked `superseded by ADR NNNN`; the replacing ADR is written
 fresh.
 

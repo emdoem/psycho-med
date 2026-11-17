@@ -1,20 +1,25 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="{{ site.lang }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}{{ title or "KURS PSYCHOTERAPII" }}{% endblock %}</title>
-  <meta name="description" content="{% block description %}{{ description }}{% endblock %}">
+  <title>{% block title %}{% if title %}{{ title }} | {% endif %}{{ site.name }}{% endblock %}</title>
+  <meta name="description" content="{{ description or site.description }}">
+  <!-- TODO: canonical link and Open Graph tags (domain and URL scheme are open decisions, PLAN.md section 5) -->
   <link rel="stylesheet" href="/assets/css/tokens.css">
   <link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body>
+  <a class="skip" href="#main">Przeskocz do treści</a>
+
   {% include "header.njk" %}
-  <main>
+
+  <main id="main">
     {% block content %}
     {{ content | safe }}
     {% endblock %}
   </main>
+
   {% include "footer.njk" %}
 </body>
 </html>

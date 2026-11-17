@@ -1,8 +1,65 @@
 ---
 layout: base.njk
 permalink: /
+title: "Strona powitalna"
 ---
-<!-- TODO: home page content pending migration (only the static intro is migrated so far) -->
-<h2>Strona powitalna</h2>
-<img src="/assets/img/KatedraPsychoterapiiUJCM_2QOY.jpg" alt="">
-<p>Fundacja Psychomed zaprasza do podjęcia <!-- original URL https://www.kurs-psychoterapii.pl/node/33 (redirects to /informacje/informacje-podstawowe-i-program-ksztalcenia) --><a href="/informacje__informacje-podstawowe-i-program-ksztalcenia/">całościowego kształcenia podyplomowego przygotowującego do uzyskania</a> Certyfikatu Psychoterapeuty&nbsp;Polskiego Towarzystwa Psychiatrycznego</p>
+{# Items are looked up by key in src/_data/nav.js (nav.byKey), not by position. #}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="content hero__inner">
+    <h1 class="hero__title" id="hero-title">{{ site.name }}</h1>
+    <!-- original URL https://www.kurs-psychoterapii.pl/node/33 (redirects to /informacje/informacje-podstawowe-i-program-ksztalcenia) -->
+    <p class="hero__lead">Fundacja Psychomed zaprasza do podjęcia <a href="{{ nav.byKey.program.url }}">całościowego kształcenia podyplomowego przygotowującego do uzyskania</a> Certyfikatu Psychoterapeuty&nbsp;Polskiego Towarzystwa Psychiatrycznego</p>
+    <p class="hero__actions">
+      <a class="btn btn--primary" href="{{ nav.byKey.rekrutacja.url }}">Rekrutacja 2026/27 - Kraków</a>
+      <a class="btn btn--ghost" href="{{ nav.byKey.program.url }}">Program i opis szkolenia</a>
+      <a class="btn btn--ghost" href="{{ nav.byKey["co-nas-wyroznia"].url }}">Co nas wyróżnia</a>
+    </p>
+  </div>
+</section>
+
+<div class="content">
+
+  <!-- TODO: heading for the announcements block (no verbatim label in the source, so none is shown; PLAN.md) -->
+
+  {% if collections.announcements.length %}
+  <section class="section">
+    <ul class="notices">
+      {% for item in collections.announcements %}
+      <li>
+        <a href="{{ item.url }}">
+          <span>
+            {% if item.data.date %}<time datetime="{{ item.data.date | htmlDateString }}">{{ item.data.date | readableDate("dd.LL.yyyy") }}</time>{% endif %}
+            {{ item.data.title }}
+          </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {# Each card body is one sentence copied verbatim from its target page (ADR 0011). #}
+  {% set cards = [
+    { num: "01", item: nav.byKey.program, text: "Szkolenie przygotowuje do pracy w zawodzie psychoterapeuty i uzyskania Certyfikatu Sekcji Naukowej Psychoterapii Polskiego Towarzystwa Psychiatrycznego zgodnie z wymogami projektu Ustawy o Zawodzie Psychoterapeuty." },
+    { num: "02", item: nav.byKey.kadra, text: "Kierownik szkolenia: Dr Krzysztof Tokarz" },
+    { num: "03", item: nav.byKey.rekrutacja, text: "Zapraszamy Państwa do aplikowania na nasze wyjątkowe Szkolenie." },
+    { num: "04", item: nav.byKey.harmonogram, text: "Organizator kursu zastrzega sobie prawo do wprowadzenia zmian w harmonogramie w czasie trwania roku akademickiego." }
+  ] %}
+  <section class="section">
+    <div class="index">
+      {% for card in cards %}
+      <article class="index__item">
+        <a class="index__link" href="{{ card.item.url }}">
+          <span class="index__num" aria-hidden="true">{{ card.num }}</span>
+          <h2 class="index__title">{{ card.item.label }}</h2>
+          <span class="index__arrow" aria-hidden="true">&#8594;</span>
+        </a>
+        <div class="index__body">
+          <p class="index__text">{{ card.text }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+</div>

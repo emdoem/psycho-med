@@ -1,83 +1,395 @@
-/* Base styles for kurs-psychoterapii. Values come from tokens.css. */
+/*
+ * Components for kurs-psychoterapii. Ported from fundacja/assets/css/style.css
+ * (ADR 0010 option C, ADR 0016 light hero, ADR 0017 CSS-only menu, ADR 0018
+ * mobile gutter). Tokens come from tokens.css; keep the two in sync with fundacja.
+ * Kurs-only additions are grouped at the end of the base section.
+ */
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font);
+  font-size:1.0625rem;
+  line-height:1.6;
+}
+h1,h2,h3{margin:0;line-height:1.05;letter-spacing:-.035em;hyphens:auto}
+p{margin:0}
+p:last-child{margin-bottom:0}
+ul{margin:0;padding:0;list-style:none}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-ink);text-decoration:underline}
+:focus-visible{outline:var(--border) solid var(--accent);outline-offset:3px}
+.mono{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
 }
 
-html {
-  font-size: 100%;
-  -webkit-text-size-adjust: 100%;
-}
+.skip{position:absolute;left:-9999px;top:0;z-index:30}
+.skip:focus{left:0;top:0;background:var(--paper);color:var(--ink);padding:.75rem 1rem;border:var(--border) solid var(--ink)}
 
-body {
-  margin: 0;
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-base);
-  color: var(--color-text);
-  background: var(--color-background);
-  text-rendering: optimizeLegibility;
-  hyphens: auto;
+/* header */
+.bar{border-bottom:var(--border) solid var(--rule)}
+.bar__inner{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:.4rem 1.5rem;
+  max-width:var(--measure);
+  margin-inline:auto;
+  padding:.9rem clamp(1.25rem,4vw,2.5rem);
 }
-
-main {
-  max-width: var(--measure-prose);
-  margin: 0 auto;
-  padding: var(--space-lg) var(--space-md);
-}
-
-main > :first-child {
-  margin-top: 0;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  line-height: 1.25;
-  margin: var(--space-lg) 0 var(--space-md);
-}
-
-p,
-ul,
-ol,
-blockquote {
-  margin: 0 0 var(--space-md);
-}
-
-ul,
-ol {
-  padding-left: 1.5em;
-}
-
-li + li {
-  margin-top: var(--space-xs);
-}
-
-a {
-  color: var(--color-link);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.15em;
-}
-
-a:visited {
-  color: var(--color-link-visited);
-}
-
-a:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 2px;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
+.bar__brand{font-size:1.1rem;font-weight:700;letter-spacing:.16em;color:var(--ink)}
+.bar__brand:hover{color:var(--accent);text-decoration:none}
+.bar__nav{display:flex;flex-wrap:wrap;gap:.35rem .9rem;align-items:baseline;font-size:.95rem}
+.bar__nav li{display:flex;align-items:baseline;gap:.9rem}
+.bar__nav li::after{content:"/";color:var(--hair);font-family:var(--mono)}
+.bar__nav li:last-child::after{content:""}
+.bar__nav a{color:var(--ink-soft);font-weight:700}
+.bar__nav a:hover{color:var(--accent);text-decoration:none}
+.bar__nav a[aria-current="page"]{color:var(--accent)}
+.bar__nav .is-section > a{box-shadow:inset 0 -var(--border) 0 var(--accent)}
+.bar__toggle,.bar__menu-btn{display:none}
+@media (max-width:40rem){
+  .bar{position:relative}
+  .bar__inner{align-items:center;padding-top:.25rem;padding-bottom:.25rem}
+  .bar__brand{font-size:.9rem;letter-spacing:.12em;padding:.2rem 0;margin:-.2rem 0}
+  .bar__toggle{
+    display:block;
+    position:absolute;
+    width:1px;
+    height:1px;
+    margin:-1px;
+    padding:0;
+    overflow:hidden;
+    clip:rect(0 0 0 0);
+    border:0;
+    white-space:nowrap;
   }
+  .bar__menu-btn{
+    display:flex;
+    align-items:center;
+    min-height:2.75rem;
+    margin-left:auto;
+    padding:0 .9rem;
+    border:var(--border) solid var(--ink);
+    font-family:var(--mono);
+    font-size:.75rem;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .bar__menu-btn:hover{background:var(--cream)}
+  #nav-toggle:checked + .bar__menu-btn{background:var(--ink);color:var(--paper)}
+  #nav-toggle:focus-visible{outline:none}
+  #nav-toggle:focus-visible + .bar__menu-btn{outline:var(--border) solid var(--accent);outline-offset:2px}
+  .bar__menu{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    z-index:10;
+    background:var(--paper);
+    border-top:var(--border) solid var(--rule);
+    border-bottom:var(--border) solid var(--rule);
+  }
+  #nav-toggle:checked ~ .bar__menu{display:block}
+  .bar__nav{display:block;font-size:1rem}
+  .bar__nav li{display:block}
+  .bar__nav li::after{content:none}
+  .bar__nav li + li{border-top:1px solid var(--hair)}
+  .bar__nav a{
+    display:flex;
+    align-items:center;
+    min-height:2.75rem;
+    padding:.6rem clamp(1.25rem,4vw,2.5rem);
+    color:var(--ink);
+  }
+  .bar__nav a[aria-current="page"]{box-shadow:inset var(--border) 0 0 var(--accent)}
+  .bar__nav .is-section > a{box-shadow:inset var(--border) 0 0 var(--accent)}
+}
+
+.content{max-width:var(--measure);margin-inline:auto;padding-inline:clamp(1.25rem,4vw,2.5rem)}
+
+/* hero: light variant (ADR 0016). No photograph: the source image is 441 px wide,
+   below the 1200 px threshold, so the hero sits on paper. If a wide photograph is
+   added later, put it behind a rgba(255,255,255,.65) mask as in fundacja. */
+.hero{padding:0;color:var(--ink);background:var(--paper)}
+/* no background image here, so the bottom padding is short; the index list follows via .section.
+   With a photo (fundacja pattern) the bottom padding would match the top again. */
+.hero__inner{padding-top:clamp(2.5rem,7vw,4.5rem);padding-bottom:clamp(1rem,3vw,2rem)}
+.hero :focus-visible{outline-color:var(--ink)}
+.hero__title{
+  margin:0 0 1.25rem;
+  font-size:clamp(1.25rem,min(max(.75rem + 2.5vw,10vw - 1.5rem),.7rem + 4.5vw),3.2rem);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:-.045em;
+  line-height:.98;
+  overflow-wrap:break-word;
+}
+.hero__lead{
+  margin:1.5rem 0 0;
+  padding:1.1rem 0 1.1rem 1.35rem;
+  border-left:var(--border) solid var(--ink);
+  font-size:clamp(1.1rem,1rem + .6vw,1.4rem);
+  font-weight:700;
+}
+.hero__actions{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.75rem 0 0}
+.btn{
+  display:inline-block;
+  padding:.7rem 1.4rem;
+  border:var(--border) solid var(--ink);
+  font:inherit;
+  font-size:.95rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.btn:hover{text-decoration:none}
+.btn--primary{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+.btn--primary:hover{background:var(--accent-ink);border-color:var(--accent-ink);color:var(--paper)}
+.btn--ghost{color:var(--ink)}
+.btn--ghost:hover{background:var(--ink);color:var(--paper)}
+
+.section{padding:clamp(2.5rem,6vw,4rem) 0 0}
+
+/* index list (home): fundacja pattern */
+.index{margin:1.5rem 0 0;border-top:var(--border) solid var(--rule)}
+.index__item{border-bottom:var(--border) solid var(--rule)}
+.index__link{
+  display:grid;
+  grid-template-columns:3.5rem 1fr auto;
+  gap:0 1rem;
+  align-items:center;
+  padding:1.5rem .75rem;
+  color:var(--ink);
+  transition:background-color .15s ease,color .15s ease;
+}
+.index__link:hover{background:var(--ink);color:var(--cream);text-decoration:none}
+.index__num{
+  font-family:var(--mono);
+  font-size:1.6rem;
+  font-weight:700;
+  color:var(--accent);
+}
+.index__link:hover .index__num{color:var(--paper)}
+.index__title{font-size:clamp(1.3rem,1rem + 1.6vw,2.1rem);font-weight:700;letter-spacing:-.035em}
+.index__arrow{font-family:var(--mono);font-size:1.3rem;color:var(--accent)}
+.index__body{padding:0 .75rem 1.5rem}
+.index__text{margin:0;max-width:62ch;color:var(--ink-soft)}
+
+/* announcements (home) */
+.notices{margin:0;border-top:var(--border) solid var(--rule)}
+.notices li{border-bottom:1px solid var(--hair)}
+.notices a{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:1rem;
+  padding:1.1rem .75rem;
+  color:var(--ink);
+  font-size:1.15rem;
+  font-weight:700;
+  letter-spacing:-.02em;
+}
+.notices a::after{content:"\2192";font-family:var(--mono);color:var(--accent)}
+.notices a:hover{background:var(--ink);color:var(--cream);text-decoration:none}
+.notices a:hover::after{color:var(--paper)}
+.notices time{display:block;margin-bottom:.2rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* footer */
+.footer{margin-top:clamp(2.5rem,6vw,4rem);background:var(--ink);color:var(--cream)}
+.footer__inner{
+  display:grid;
+  gap:2rem;
+  max-width:var(--measure);
+  margin-inline:auto;
+  padding:clamp(2rem,5vw,3rem) clamp(1.25rem,4vw,2.5rem);
+}
+@media (min-width:52rem){
+  .footer__inner{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1.1fr)}
+}
+.footer__name{margin:0 0 .6rem;font-size:1.05rem;font-weight:700;max-width:36ch;color:var(--paper)}
+.footer__meta{margin:0 0 .6rem;font-size:.85rem;color:#c9c2b5}
+.footer__meta a{color:var(--paper);border-bottom:1px solid var(--accent-lift)}
+.footer__title{margin:0 0 .75rem;font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-lift)}
+.footer__list{display:grid;gap:.4rem;font-size:.85rem}
+.footer__list a{color:var(--cream)}
+.footer__list a:hover{color:var(--paper);text-decoration:none;border-bottom:1px solid var(--accent-lift)}
+.footer__bottom{
+  max-width:var(--measure);
+  margin:0 auto;
+  padding:1rem clamp(1.25rem,4vw,2.5rem) 1.5rem;
+  border-top:var(--border) solid var(--accent-lift);
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:#c9c2b5;
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}
+}
+
+/* inner pages: page head, section nav, prose */
+.page-head{
+  padding-top:clamp(2.5rem,7vw,4.5rem);
+  border-bottom:var(--border) solid var(--ink);
+  margin-bottom:clamp(2rem,5vw,3rem);
+}
+.page-head .mono{margin:0 0 .85rem}
+.page-head h1{
+  margin:0 0 1.25rem;
+  font-size:clamp(2.1rem,1rem + 5vw,3.6rem);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:-.045em;
+  line-height:.98;
+  overflow-wrap:break-word;
+}
+
+/* section nav: a compact list above the prose on phones (wayfinding on long pages),
+   a left column beside the prose from 52rem */
+.secnav{margin:0 0 clamp(1.75rem,4vw,2.5rem)}
+.secnav__list{border-top:var(--border) solid var(--rule)}
+.secnav__list li{border-bottom:1px solid var(--hair)}
+.secnav__list a{
+  display:flex;
+  align-items:center;
+  min-height:2.75rem;
+  padding:.5rem 0;
+  font-size:.95rem;
+  font-weight:700;
+  color:var(--ink-soft);
+}
+.secnav__list a:hover{color:var(--accent);text-decoration:none}
+.secnav__list a[aria-current="page"]{color:var(--accent);box-shadow:inset var(--border) 0 0 var(--accent);padding-left:.75rem}
+@media (min-width:52rem){
+  .page-body--aside{display:grid;grid-template-columns:minmax(0,14rem) minmax(0,46rem);column-gap:3rem;align-items:start}
+  .page-body--aside .secnav{margin:0}
+  .secnav__list a{padding-top:.6rem;padding-bottom:.6rem}
+}
+
+.prose{
+  max-width:46rem;
+  font-size:1.0625rem;
+  line-height:1.75;
+  color:var(--ink);
+  overflow-wrap:break-word;
+  hyphens:auto;
+}
+.prose p{margin:0 0 1em}
+.prose > :last-child{margin-bottom:0}
+.prose strong{font-weight:700}
+.prose h2,.prose h3{margin:0 0 .9em}
+.prose ul{list-style:disc outside;padding-left:1.5em;margin:0 0 1.25em}
+.prose ol{list-style:decimal outside;padding-left:1.5em;margin:0 0 1.25em}
+.prose li{margin:0 0 .35em}
+.prose li:last-child{margin-bottom:0}
+.prose a{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.2em}
+.prose a:hover{text-decoration-thickness:3px}
+
+/* prose images: fluid, never wider than the column */
+.prose img{display:block;max-width:100%;height:auto;margin:1.25rem 0}
+
+/* prose iframes (Google Docs embeds): full column width, fixed height that scales with the viewport */
+.prose iframe{display:block;width:100%;height:clamp(24rem,70vh,52rem);margin:0 0 1.5rem;border:1px solid var(--hair)}
+
+/* prose tables (harmonogram): wrapped in .table-scroll (added at build time, .eleventy.js), which
+   scrolls on narrow screens instead of widening the page. The wrapper is the keyboard-focusable region. */
+.table-scroll{
+  max-width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  margin:0 0 1.5rem;
+}
+.table-scroll:focus-visible{outline:var(--border) solid var(--accent);outline-offset:3px}
+.prose table{
+  border-collapse:collapse;
+  font-size:.9rem;
+  line-height:1.5;
+}
+.prose td,.prose th{padding:.4rem .6rem;border:1px solid var(--hair);vertical-align:top;text-align:left}
+.prose th{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase}
+.prose td p{margin:0 0 .4em}
+
+/* download links to /assets/files/: a mono file-type label, chosen by extension */
+.prose a[href*="/assets/files/"]{font-weight:700;border-bottom:var(--border) solid var(--accent)}
+.prose a[href*="/assets/files/"][href$=".doc"]::after,
+.prose a[href*="/assets/files/"][href$=".docx"]::after,
+.prose a[href*="/assets/files/"][href$=".zip"]::after,
+.prose a[href*="/assets/files/"][href$=".pdf"]::after{
+  display:inline-block;
+  margin-left:.5rem;
+  padding:.1rem .4rem;
+  border:1px solid var(--ink);
+  font-family:var(--mono);
+  font-size:.68rem;
+  font-weight:700;
+  letter-spacing:.1em;
+  line-height:1.4;
+  text-decoration:none;
+  vertical-align:middle;
+  color:var(--ink);
+}
+.prose a[href*="/assets/files/"][href$=".doc"]::after{content:"DOC"}
+.prose a[href*="/assets/files/"][href$=".docx"]::after{content:"DOCX"}
+.prose a[href*="/assets/files/"][href$=".zip"]::after{content:"ZIP"}
+.prose a[href*="/assets/files/"][href$=".pdf"]::after{content:"PDF"}
+
+/* Mobile tightening (<=40rem only). Overrides the base rules above; desktop untouched.
+   Shared 1rem gutter as in fundacja ADR 0018. */
+@media (max-width:40rem){
+  .content{padding-inline:1rem}
+  .bar__inner,.bar__nav a{padding-inline:1rem}
+  .footer__inner,.footer__bottom{padding-inline:1rem}
+
+  /* hero */
+  .hero__inner{padding-top:1.75rem;padding-bottom:1.75rem}
+  .hero__title{margin:0 0 .85rem}
+  .hero__lead{margin:1.1rem 0 0;padding:.8rem 0 .8rem 1.1rem}
+  .hero__actions{margin-top:1.25rem;gap:.4rem;flex-wrap:wrap}
+  .btn{
+    flex:1 1 auto;
+    padding:.5rem;
+    border-width:2px;
+    font-size:.8rem;
+    letter-spacing:.02em;
+    text-align:center;
+    white-space:nowrap;
+  }
+
+  /* index, announcements, inner pages */
+  .section{padding-top:1.75rem}
+  .index{margin-top:1rem}
+  .index__link{grid-template-columns:3rem 1fr auto;gap:0 .75rem;padding:1.1rem .6rem}
+  .index__body{padding:0 .6rem 1rem}
+  .notices a{padding:.9rem .6rem}
+  .page-head{padding-top:1.75rem;margin-bottom:1.25rem}
+  .page-head h1{margin-bottom:1rem}
+  .prose iframe{height:clamp(20rem,60vh,36rem)}
+
+  /* footer */
+  .footer{margin-top:1.75rem}
+  .footer__inner{gap:1.5rem;padding-top:1.5rem;padding-bottom:1.5rem}
+  .footer__name{margin-bottom:.5rem}
+  .footer__title{margin-bottom:.5rem}
+  .footer__bottom{padding-top:.75rem;padding-bottom:1rem}
+}
+
+/* Hero buttons share one row only when the row fits (viewport >= 24.25rem = 388px). */
+@media (min-width:24.25rem) and (max-width:40rem){
+  .hero__actions{flex-wrap:nowrap}
 }

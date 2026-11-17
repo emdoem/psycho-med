@@ -1,6 +1,7 @@
 # ADR 0001: Build the site as plain HTML and CSS with no build step
 
 - Status: accepted
+- Scope: the main site (`fundacja/`) only. The kurs-psychoterapii site is built with Eleventy under [ADR 0009](0009-static-site-generator-for-kurs-psychoterapii.md), which is proposed, and this ADR does not apply to it.
 - Date: 2026-10-10
 
 ## Context
