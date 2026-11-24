@@ -1,5 +1,5 @@
 ---
-title: "Lublin - calosciowy kurs psychoterapii"
+title: "Lublin - całościowy kurs psychoterapii"
 year: "" # TODO: year not stated in source; body says last edition 2022/24 - 2025/26; owner to set
 ---
 

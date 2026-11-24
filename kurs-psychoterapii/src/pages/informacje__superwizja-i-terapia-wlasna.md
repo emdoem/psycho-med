@@ -1,5 +1,5 @@
 ---
-title: "Superwizja i terapia wlasna"
+title: "Superwizja i terapia własna"
 ---
 
 **[Oferta superwizji (Kraków i Lublin)](https://docs.google.com/document/d/e/2PACX-1vTMIth-F56rxMzVOx-Ra8tEJQC1AYUcgnxu2eMwx1fZsg7zrz7DHf_ECnHJaO64-yBN9Jl09sBNwzzn/pub)**

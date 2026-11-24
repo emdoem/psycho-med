@@ -2,6 +2,8 @@
 
 - Status: proposed
 - Date: 2026-10-18
+- Revised: 2026-11-24 (Decap login decision recorded in Consequences and Open
+  questions; status unchanged)
 
 ## Context
 
@@ -46,10 +48,12 @@ not from shared tooling. The main site keeps its plain HTML approach unchanged.
 - Node.js and npm become build dependencies of this site only.
 - A build step runs before deployment. Its output is plain static files in
   `_site/`, which can be uploaded to the existing server.
-- Decap needs a git backend. The host is not Netlify, so the GitHub backend
-  requires the client to have a GitHub account with write access to the
-  repository. The alternative is an OAuth proxy. **This is an open decision,
-  recorded here and not resolved.**
+- Decap needs a git backend. **Owner decision (2026-11-24):** the client agrees
+  to have a GitHub account, so the Decap GitHub backend is used directly for
+  login. The OAuth proxy is not needed for login itself.
+- **Open infrastructure item, not resolved:** on a host that is not Netlify, the
+  GitHub backend still needs an OAuth app and a handler to complete login. Server
+  details are pending from the owner.
 - [ADR 0001](0001-plain-html-css.md) is superseded for this site only. Its
   constraints remain in force for the main site.
 - The main site's plan rule "no build toolchain" must be scoped to the main
@@ -57,5 +61,7 @@ not from shared tooling. The main site keeps its plain HTML approach unchanged.
 
 ## Open questions
 
-- GitHub backend or OAuth proxy for Decap.
+- Decap login: the GitHub backend is chosen (decided 2026-11-24, client has a
+  GitHub account). Still open: the OAuth app and handler needed to complete login
+  on a non-Netlify host, pending the owner's server details.
 - Can the existing server run a deploy step, or does it only accept uploads?

@@ -1,6 +1,6 @@
 # ADR 0003: Reproduce the archived content verbatim with a single shared source for contact data
 
-- Status: accepted
+- Status: accepted (diacritics exception for the kurs-psychoterapii site, see [ADR 0020](0020-restore-polish-diacritics-on-kurs-site.md))
 - Date: 2026-10-10
 - Note (2026-10-26): Open question on visible e-mail display resolved by [ADR 0012](0012-email-shown-obfuscated-as-text.md) (visible text obfuscated, real address only in `mailto:`).
 

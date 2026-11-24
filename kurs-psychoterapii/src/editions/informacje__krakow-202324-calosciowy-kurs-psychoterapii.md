@@ -1,11 +1,11 @@
 ---
-title: "Kraków - 2023/24 - calosciowy kurs psychoterapii"
+title: "Kraków - 2023/24 - całościowy kurs psychoterapii"
 year: "2023/24"
 ---
 
 Organizator zastrzega sobie prawo do wprowadzania zmian w harmonogramie w czasie trwania roku akademickiego.
 
-[Superwizja, terapia wlasna, grupa Balinta](/informacje__superwizja-i-terapia-wlasna/),&nbsp;&nbsp;&nbsp; [Zgrupowania dydaktyczno-treningowe](#TODO-route)<!-- TODO: original URL https://www.kurs-psychoterapii.pl/node/31 (Zgrupowania dydaktyczno-treningowe) is not in the 16-route list -->
+[Superwizja, terapia własna, grupa Balinta](/informacje__superwizja-i-terapia-wlasna/),&nbsp;&nbsp;&nbsp; [Zgrupowania dydaktyczno-treningowe](#TODO-route)<!-- TODO: original URL https://www.kurs-psychoterapii.pl/node/31 (Zgrupowania dydaktyczno-treningowe) is not in the 16-route list -->
 
 ---
 

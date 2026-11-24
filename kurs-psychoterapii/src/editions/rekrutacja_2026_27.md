@@ -1,5 +1,5 @@
 ---
-title: "Calosciowe szkolenie w psychoterapii - rekrutacja 2026/2027"
+title: "Całościowe szkolenie w psychoterapii - rekrutacja 2026/2027"
 year: "2026/2027"
 ---
 

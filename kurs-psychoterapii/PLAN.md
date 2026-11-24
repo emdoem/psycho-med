@@ -16,7 +16,7 @@ Legend:
 - Eleventy 3.x (`@11ty/eleventy` ^3.1.7; build run with v3.1.7). Input `src/`, output `_site/`.
 - Templates: Nunjucks (`src/_includes/base.njk`, `page.njk`, `header.njk`, `footer.njk`; `src/index.njk`). Navigation and foundation data in `src/_data/`.
 - Output: plain static HTML/CSS in `_site/`. No client-side framework.
-- Decap CMS 3.17.1, pinned in `src/admin/index.html` with an SRI hash. Backend config in `src/admin/config.yml` (repo is `emdoem/kurs-psychoterapii-content`, to be confirmed in K-72; login model still open, K-41).
+- Decap CMS 3.17.1, pinned in `src/admin/index.html` with an SRI hash. Backend config in `src/admin/config.yml` (repo is `emdoem/kurs-psychoterapii-content`, to be confirmed in K-72). Login: GitHub backend chosen 2026-11-24 (K-41); the OAuth app and handler for a non-Netlify host are an open infra item.
 - Passthrough copy: `src/admin`, `src/assets/css`, `src/assets/img`, `src/assets/files`.
 
 **Migrated content**
@@ -80,9 +80,47 @@ Phase 1 follow-ups (left open by the 2026-11-17 build):
   - Status: blocked by K-04 (URL scheme and domain). Owner: owner-decision, then dev.
   - Acceptance: every page has a canonical link and `og:` tags; the TODO comment is removed.
 
-- [ ] **K-62** Hero photograph
-  - Status: open. Owner: owner-decision (supply a photograph of at least about 1200 px wide). The current `KatedraPsychoterapiiUJCM_2QOY.jpg` is 441 x 332 px, so the hero has no background image. The inline image was removed from the home page.
-  - Acceptance: a licensed image of at least about 1200 px is supplied, or the hero stays on paper and the decision is recorded.
+- [ ] **K-62** Hero photograph (final image still open; placeholder in place, see K-73)
+  - Status: open. Owner: owner-decision. The hero now uses `placeholder-hero.jpg`, a copy of fundacja's `hero-lubelska.jpg` (1920 x 1080 px, 675 452 bytes). The current `KatedraPsychoterapiiUJCM_2QOY.jpg` is 441 x 332 px and stays off the pages.
+  - Acceptance: the owner supplies a licensed photograph at least 1920 x 1080 px (the fundacja hero size), saved as `src/assets/img/placeholder-hero.jpg` or with the CSS reference in `site.css` updated; source and licence recorded.
+
+- [x] **K-73** Hero with placeholder photo and no-photo variant
+  - Status: done 2026-11-23. Home hero is `hero hero--photo` (`src/index.njk`): the fundacja photo hero (ADR 0016: 65% white mask, cover, centre, same mobile padding) using `placeholder-hero.jpg`. Removing the `hero--photo` class gives the no-photo layout, which still works. The photo variant restores the fundacja bottom padding. Verified by build and headless screenshots at 1280 and 375 px.
+  - Acceptance: home hero shows the placeholder behind the mask; the no-photo layout is kept via the modifier. Met.
+  - Note: the kurs hero has no brand or facts spans, so the `--accent` vs `--accent-deep` drift (plan risk 18 in the main project) does not affect it.
+
+- [x] **K-74** Per-section inner-page backgrounds
+  - Status: done 2026-11-23. `src/_data/backgrounds.json` maps a nav section key to a class: `program` and `kadra` to `page-bg-1`; `rekrutacja` and `harmonogram` (and so their editions) to `page-bg-2`. `base.njk` puts the class on `<main>`, as fundacja does. Pages without a mapped section (home, footer-only pages, announcements) get none. No content Markdown was edited. CSS: cover, centre, no-repeat, `background-attachment: fixed` with the iOS `scroll` fallback, and the 65% mask, all as fundacja.
+  - Acceptance: each section page shows its background; the other pages show none; text remains readable under the same mask. Checked by build output and screenshots at 1280 px (programme and harmonogram pages).
+
+- [ ] **K-75** Owner supplies final images (replace the placeholders)
+  - Status: open. Owner: owner-decision (the photos, their source and licence). Current placeholders are copies from fundacja (`placeholder-hero.jpg`, `placeholder-bg-1.jpg`, `placeholder-bg-2.jpg`) and are temporary.
+  - Recommended minimum sizes, from the fundacja files read in the image header: hero 1920 x 1080 px (landscape); inner-page backgrounds 1376 x 768 px (landscape, as the current placeholders). Ask for at least these sizes; larger is fine if compressed.
+  - Acceptance: owner supplies the three images (or the names change in `site.css` and `backgrounds.json`); licence recorded; K-62 closed.
+
+- [ ] **K-76** Placeholder image weight (risk)
+  - Status: open. Owner: dev (decide after K-75). The placeholders are not recompressed, as the owner will replace them: `placeholder-hero.jpg` 675 452 bytes (about 660 KiB), `placeholder-bg-1.jpg` 822 857 bytes (about 804 KiB), `placeholder-bg-2.jpg` 877 622 bytes (about 857 KiB). All three are over 500 KB, so the hero and the inner pages load a lot of image data, which affects LCP. The backgrounds on inner pages are loaded on every section page.
+  - Acceptance: final images are compressed to a stated budget (for example under 500 KB each) or the owner accepts the weight in writing.
+
+- [ ] **K-77** Contrast over the photographs (owner decision, affects fundacja too)
+  - Status: decided 2026-11-24, **C chosen**: keep the current 65% white mask, no CSS change now, and check contrast per final image (K-79). Recorded in `docs/adr/0021-keep-white-mask-with-per-image-contrast-checks.md` (main project), with a consequence note in ADR 0016. Owner: done. Stays open until K-79 passes for every final image. Both sites put a 65% white translucent mask over the photographs (home hero and section backgrounds here, per ADR 0019; fundacja hero per ADR 0016). Worst case (dark photo pixel under the mask): `#c2410c` accent links about 2.1:1, `#4a443d` ink-soft mono labels about 3.9:1, both fail WCAG AA. Average pixel: accent links about 3.6:1. Body text `#14110e` about 7.7:1 passes. Tracked as `docs/plan.md` risk 23.
+  - Acceptance: option C is recorded (met, 2026-11-24); the contrast table in ADR 0016 is noted or recomputed for the final images (K-75 may change the worst case); K-79 is done; risk 23 is closed.
+
+- [ ] **K-79** Per-image contrast check when final images arrive
+  - Status: open. Owner: dev. Blocked by K-75 (final images not yet supplied). Linked to K-75 and K-77.
+  - Work: before each final image goes live, check the text over the masked image: accent links `#c2410c`, ink-soft `#4a443d` labels and body text `#14110e`. AA 4.5:1 for normal text, 3:1 for large text. Use the same 65% mask as the CSS. Apply to the home hero, the two section backgrounds and any new background.
+  - Acceptance: each final image has a recorded ratio for each text colour in this file or in the README; an image that fails is reported to the owner for a decision (per ADR 0021, the fix is the owner's); K-77 and risk 23 are closed once all images pass.
+
+- [ ] **K-80** Decap media and file widgets for downloads and hero/background images
+  - Status: open. Owner: dev. Owner decided 2026-11-24 that the recruitment downloads (`src/assets/files/`) and the images (hero and background, and content images) must be manageable by the client in the Decap editor. Currently neither is: `media_folder` is `src/assets/img`, and `src/assets/files/` has no collection (K-25).
+  - Work: add Decap media and file widgets for the two folders. Set a folder for each collection or field (`media_folder` and `public_folder` per field), so uploads land in the right place and their public URLs match the template references. Write naming and size guidance in the README: the hero is referenced by file name in `site.css` and the section backgrounds by name in `src/_data/backgrounds.json`, so either keep the names or change the references in the same change. Size guidance per K-75 (hero 1920 x 1080 px, inner backgrounds 1376 x 768 px) and weight per K-76.
+  - Do not change config until this item starts. Ownership of the files stays with K-25.
+  - Acceptance: the client can upload and replace the recruitment files and the hero and background images from `/admin/`; the public URLs match the templates; the naming and size guidance is in the README; `BOUNDARIES.md` reads "client-editable" instead of "to become client-editable".
+
+- [ ] **K-78** Content-management discussion (Decap, roles, workflow, media)
+  - Status: open. Owner: owner-decision, then dev. Requested by the owner. Current state of `src/admin/config.yml`: `backend.name: github`, `repo: emdoem/kurs-psychoterapii-content`, `branch: main`, `publish_mode: editorial_workflow`, and collections `pages` (`src/pages`), `announcements` (`src/announcements`) and `editions` (`src/editions`). The file's header comment still says PLACEHOLDER (K-72).
+  - To discuss: (1) the backend and login model (K-41, D-08); (2) who edits what: pages, announcements and editions are in Decap, while the nav and footer (`src/_data/nav.js`, `org.json`), `backgrounds.json` and the CSS are not, so label or layout changes need the developer; (3) the editorial workflow: who writes drafts, who reviews, who publishes; (4) media: Decap's media folder is `src/assets/img` (public `/assets/img`), so the hero and background images are replaced by upload only under the same file names or with a CSS and JSON change (K-75); `src/assets/files/` (recruitment forms) has no collection (K-25); image size and weight (K-76).
+  - Acceptance: the owner and dev agree the answers in writing (a README section, or an ADR if it is a decision); the PLACEHOLDER comment is removed (K-72); K-25, K-41 and K-76 are updated to match.
 
 - [ ] **K-63** Kadra card body on the home page
   - Status: open. Owner: owner-decision (ADR 0011). The body is "Kierownik szkolenia: Dr Krzysztof Tokarz", a fragment joined from two lines of the Kadra page, because the page has no full verbatim sentence.
@@ -106,8 +144,10 @@ Phase 1 follow-ups (left open by the 2026-11-17 build):
 
 Review follow-ups (2026-11-17 review, no blockers; should-fix items were fixed, see the session log):
 
-- [ ] **K-68** Transliterated titles (8 front-matter titles, owner decision)
-  - Status: open. Owner: owner-decision. The titles are ASCII-transliterated, while the nav labels use the live Polish spelling. The visible h1 and the `<title>` come from the front matter, so they show the ASCII form.
+- [x] **K-68** Transliterated titles (8 front-matter titles, owner decision)
+  - Status: done 2026-11-24. Owner decided: restore the diacritics only (wording, typos, URLs, slugs and file names unchanged). Recorded in `docs/adr/0020-restore-polish-diacritics-on-kurs-site.md` as an exception to ADR 0003. The 8 titles and the one body link label now carry diacritics; the typos `szkleniem` (`rekrutacja_2026_27.md` body) and `Psychotrapia` (harmonogram table row 5) stay.
+  - Confirm: the label "Superwizja, terapia własna, grupa Balinta" has diacritics in two edition bodies (`informacje__krakow-202324-calosciowy-kurs-psychoterapii.md` line 8, `krakow_2024_25.md` line 6). The owner counted one body link, so the owner confirms which one was in scope.
+  - Original state (for reference): the titles were ASCII-transliterated, while the nav labels use the live Polish spelling. The visible h1 and the `<title>` come from the front matter.
   - Files, current → live verbatim:
     - `src/pages/informacje__akredytowane-osrodki-stazowe.md`: "Akredytowane osrodki stazowe" → "Akredytowane ośrodki stażowe"
     - `src/pages/informacje__krakow-calosciowy-kurs-psychoterapii.md`: "Kraków - calosciowy kurs psychoterapii" → "Kraków - całościowy kurs psychoterapii"
@@ -118,7 +158,7 @@ Review follow-ups (2026-11-17 review, no blockers; should-fix items were fixed, 
     - `src/editions/krakow_2024_25.md`: "…calosciowy…" → "…całościowy…"
     - `src/editions/rekrutacja_2026_27.md`: "Calosciowe szkolenie…" → "Całościowe szkolenie…"
   - Also ASCII in body text, not in the 8 titles: link labels such as "Superwizja, terapia wlasna, grupa Balinta" in `src/editions/informacje__krakow-202324-calosciowy-kurs-psychoterapii.md` (line 8). Decide these in the same pass.
-  - Acceptance: owner picks the spelling; the 8 titles and any body labels match it; the nav and the titles agree.
+  - Acceptance: owner picks the spelling; the 8 titles and any body labels match it; the nav and the titles agree. Met for the 8 titles and the one body link label (2026-11-24). Remaining body ASCII labels: none found by a case-insensitive search of `src/`.
 
 - [ ] **K-69** Duplicate table-region names (nit)
   - Status: open. Owner: dev. The `.table-scroll` regions on the harmonogram pages are both labelled "Harmonogram" (from the nearest heading), so two regions share a name.
@@ -229,8 +269,8 @@ Section 2 note: the nav as built is in `src/_data/nav.js`. Header: Program i opi
   - Status: open. Owner: dev (verify it renders), owner-decision (should the landing link go to the programme page or to the course overview?).
   - Acceptance: link on `_site/index.html` resolves to a `200` page with the programme text; the owner has decided the target.
 - [ ] **K-41** Decap repository and login model in `src/admin/config.yml`
-  - Status: open. Owner: owner-decision (client needs a GitHub account with write access, or an OAuth proxy; see D-08).
-  - Acceptance: `backend.repo` is no longer `REPLACE_ME/REPLACE_ME` (grep returns nothing); login path is decided and documented in README.
+  - Status: partly decided 2026-11-24. The client agrees to have a GitHub account, so the Decap GitHub backend is used directly for login (no OAuth proxy needed for login itself). Open infra item, not resolved: the GitHub backend still needs an OAuth app and a handler to complete login when the site is not on Netlify. Server details are pending from the owner (see D-08 and the open discussion items in section 8). ADR 0009 open question updated.
+  - Acceptance: `backend.repo` is no longer `REPLACE_ME/REPLACE_ME` (grep returns nothing; met for the current file); login path is documented in README, including the OAuth handler once the owner's server details are known.
 - [ ] **K-42** Announcement date (`src/announcements/rekrutacja-2026-27-krakow.md`)
   - Status: open. Owner: owner-decision (date not in source; set it in Decap or in the file).
   - Acceptance: `date:` is set; the TODO comment is removed.
@@ -267,7 +307,7 @@ Numbered for reference. Each is linked to the item that needs it.
 5. **D-05** Home page: sections, C4 duplicate intro kept or removed, landing link target (K-07, K-40).
 6. **D-06** Expired content: zgrupowanie and past editions (K-11).
 7. **D-07** Recruitment year and labels: "edycja 2025" slug vs "edycja 2026" heading vs "Rekrutacja 2025/26" nav (K-14).
-8. **D-08** Decap login model: GitHub accounts or OAuth proxy; repo owner/name (K-41).
+8. **D-08** Decap login model: GitHub backend chosen 2026-11-24 (client has a GitHub account). Still open: the OAuth app and handler for a non-Netlify host, pending the owner's server details; repo owner/name (K-41, K-72).
 9. **D-09** Lublin edition year (K-12).
 10. **D-10** Kraków non-edycja page: is the recruitment link time-specific (K-13).
 11. **D-11** Recruitment file owner: owner or developer (K-25).
@@ -275,14 +315,29 @@ Numbered for reference. Each is linked to the item that needs it.
 13. **D-13** Banner alt text for the recruitment image (currently `alt=""`; see `src/announcements/rekrutacja-2026-27-krakow.md`).
 14. **D-14** Approve the fetch of node/31 and node/55 pages into `legacy/` (K-10).
 15. **D-15** Approve main-project docs follow-ups (K-50 to K-52). Done 2026-11-17.
-16. **D-16** Spelling of the 8 transliterated titles and related body labels (K-68).
+16. **D-16** Spelling of the 8 transliterated titles and related body labels (K-68). Decided 2026-11-24: diacritics restored ([ADR 0020](../docs/adr/0020-restore-polish-diacritics-on-kurs-site.md)).
 17. **D-17** Confirm the Decap repository `emdoem/kurs-psychoterapii-content` (K-72).
 18. **D-18** Accept the CSS-only menu's missing `aria-expanded` or allow a script (K-70).
+19. **D-19** Contrast over the photographs. Decided 2026-11-24: option C, keep the 65% mask and check per image (ADR 0021; K-77, K-79; affects fundacja too, risk 23 in `docs/plan.md`).
+20. **D-20** Content management: Decap backend and login, who edits what, editorial workflow, media handling for `src/assets/img` and `src/assets/files` (K-78). Decided 2026-11-24 in part: GitHub backend (D-08); client-manageable downloads and images (K-80).
+
+### Open discussion items (no decision yet)
+
+Listed for discussion only. None is decided. Each becomes a numbered decision when the owner answers it.
+
+- **Repository structure.** Options: monorepo (the current layout, this repository), a split site repo, or a split content repo. Decap currently points at `emdoem/kurs-psychoterapii-content` (K-72), so the content and the site are already in two places. Question: which layout to keep.
+- **Repository ownership.** Who owns the repository, and who can merge and deploy.
+- **Deployment and maintenance.** How the built `_site/` reaches the server, who runs the build, and who maintains the site after launch. ADR 0009 asks whether the existing server can run a deploy step or only accepts uploads.
+- **Publishing approval.** How approval is enforced, not only described. Decap's `editorial_workflow` gives a review step; who may publish, and whether the git host enforces it, is not yet set.
+- **Server and infrastructure details (pending from the owner).** Server type (D-02), the OAuth app and handler for Decap login on a non-Netlify host (D-08, K-41), and the deploy method. Nothing here is resolved.
 
 ---
 
 ## 9. Session log
 
+- **2026-11-24 - owner decisions on contrast, Decap login, files and images.** (1) Contrast: option C chosen (keep the 65% mask, check per image); K-77 marked decided, K-79 added (linked to K-75); ADR 0021 and a consequence note in ADR 0016; risk 23 updated in `docs/plan.md`. (2) Decap login: GitHub backend chosen, since the client has a GitHub account; the OAuth app and handler for a non-Netlify host stay an open infra item; K-41 and D-08 updated; ADR 0009 open question updated (still proposed). (3) Files and images: client-manageable in the editor; K-80 added (Decap media and file widgets, folders, naming and size guidance); `BOUNDARIES.md` field notes marked "to become client-editable (pending K-80)". No config changed. (4) Open discussion items listed in section 8 (repo structure, ownership, deployment and maintenance, publishing approval, server details). No code changed; nothing committed.
+- **2026-11-24 - diacritics, contrast risk, content management.** Owner decided to restore Polish diacritics in the 8 migrated titles and one body link label (K-68 done; wording, typos, URLs, slugs and file names unchanged). Recorded as ADR 0020, an exception to ADR 0003 (status line of ADR 0003 updated). ADR 0019 gained a consequence on the hero and section backgrounds and the placeholder copies. `docs/plan.md` gained risk 23 (contrast over the photographs, both sites, owner decision pending). Added K-77 (contrast decision) and K-78 (content management), and D-19 and D-20. The K-73 and K-74 screenshot claims are confirmed: the orchestrator viewed `.screens/home-1280.png` and `.screens/inner-1280.png`.
+- **2026-11-23 - hero and section backgrounds.** Copied fundacja's three images as placeholders (`placeholder-hero.jpg`, `placeholder-bg-1.jpg`, `placeholder-bg-2.jpg`). Added the home photo hero with the `hero--photo` modifier, the per-section background mechanism (`backgrounds.json`, class on `<main>` in `base.njk`), and the CSS in `site.css`. Build exit 0, 19 pages. Opened K-73 to K-76. Deviation: the per-section class is set in `base.njk` (not `page.njk`) because `<main>` lives in the base layout.
 - **2026-11-17 - review fixes.** Applied the should-fix findings of the UI review: footer text uses the muted colour; every iframe has a title (copied from the page h1 at build time); tables are wrapped in keyboard-focusable `.table-scroll` regions named from the nearest heading; `hyphens: auto` on prose; dead CSS removed; the 2023/24 nav label is verbatim from the live menu; landmark names are unique; templates reference nav entries by key (`nav.byKey`); hero padding reduced. Opened K-68 to K-72. Docs: ADR 0019 (new), ADR 0001 scope line, `docs/plan.md` and the ADR index updated (K-50 to K-52 done).
 - **2026-11-07 - scaffold.** Created `kurs-psychoterapii/`: Eleventy 3.x, Nunjucks layouts, empty header/footer stubs, `src/index.njk`, `tokens.css` and `site.css` placeholders, Decap admin (3.17.1 pinned, SRI), `.eleventy.js` passthroughs, README and BOUNDARIES.
 - **2026-11-07 - migration of 16 routes.** Migrated 8 pages to `src/pages/`, 8 editions to `src/editions/` (Lublin moved from pages to editions), 1 announcement, 3 ankieta files to `src/assets/files/`. Recruitment link rewritten; node/33 and node/43 resolved.

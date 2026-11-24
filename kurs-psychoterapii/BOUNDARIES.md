@@ -13,7 +13,9 @@ Which parts of the site are developer-owned, which the client edits in Decap
 
 IDs used above (from the source page inventory): C1 = home page intro, C2 = recruitment banner, C4 = duplicate intro, C5 = recruitment banner link. C3 is not referenced here.
 
-**Field note - downloadable files (`src/assets/files/`):** these files (currently the recruitment questionnaire `ankieta_rekrutacja.doc`, `.zip`, `.docx`, linked from `src/editions/rekrutacja_2026_27.md`) are client-replaceable and time-specific: replace them when the form changes. Decap has no media collection for this folder yet (`media_folder` is `src/assets/img`), so replacement is done through the repository until one is added. Each link keeps the original live URL in an HTML comment.
+**Field note - hero and section background images:** the home hero photo and the inner-page backgrounds are decorative CSS backgrounds, not content. They are **to become client-editable (pending K-80)**: referenced by file name in `src/assets/css/site.css` and mapped to sections in `src/_data/backgrounds.json`. Today they are **developer-managed** and **not in Decap** (no collection or field uses them), so the client cannot replace them through `/admin/`. Current files are placeholders copied from fundacja (`placeholder-hero.jpg`, `placeholder-bg-1.jpg`, `placeholder-bg-2.jpg`); the owner will supply final images (`PLAN.md` K-75). Replacing an image means replacing the file under `src/assets/img/` and keeping its name, or changing the name in the CSS and the JSON.
+
+**Field note - downloadable files (`src/assets/files/`):** these files (currently the recruitment questionnaire `ankieta_rekrutacja.doc`, `.zip`, `.docx`, linked from `src/editions/rekrutacja_2026_27.md`) are time-specific and are **to become client-editable (pending K-80)**: replace them when the form changes. Today Decap has no media collection for this folder (`media_folder` is `src/assets/img`), so replacement is done through the repository until K-80 is done. Each link keeps the original live URL in an HTML comment.
 
 ## Open decisions
 

@@ -14,7 +14,10 @@
 
   {% include "header.njk" %}
 
-  <main id="main">
+  {# Per-section background class (src/_data/backgrounds.json, keyed by nav section key). Pages without a mapped section get none. #}
+  {% set section = nav.sectionFor[page.url] %}
+  {% set bgClass = backgrounds[section.key] if section.key else "" %}
+  <main id="main"{% if bgClass %} class="{{ bgClass }}"{% endif %}>
     {% block content %}
     {{ content | safe }}
     {% endblock %}

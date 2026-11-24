@@ -245,6 +245,11 @@ Until the choice is made, the status stays `proposed`.
 - The hero no longer matches `mockup/option-c2.html`, which the plan names as
   the production reference. The mockup is not changed.
 - The mask opacity is hard-coded. Any change to it needs a new contrast check.
+- **Contrast decision (2026-11-24).** The owner keeps the 65% mask and chose
+  per-image contrast checks before each final photograph goes live
+  ([ADR 0021](0021-keep-white-mask-with-per-image-contrast-checks.md)). The table
+  above is the worst case for the placeholder photograph. It does not show that a
+  final image passes. This ADR's status is unchanged.
 - The type rebalance and the overflow fix are part of this hero treatment and do
   not need an ADR of their own. They are not a separate decision. The fix is
   described below.

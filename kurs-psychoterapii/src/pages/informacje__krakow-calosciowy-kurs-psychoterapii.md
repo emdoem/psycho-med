@@ -1,5 +1,5 @@
 ---
-title: "Kraków - calosciowy kurs psychoterapii"
+title: "Kraków - całościowy kurs psychoterapii"
 ---
 
 Fundacja "Psychomed" organizuje czteroletnie, całościowe szkolenie w psychoterapii.

@@ -1,5 +1,5 @@
 ---
-title: "Akredytowane osrodki stazowe"
+title: "Akredytowane ośrodki stażowe"
 ---
 
 Kliniczne kursy stażowe realizowane<br>w Zakładzie Psychoterapii Szpitala Uniwersyteckiego w Krakowie<br>we współpracy z Medycznym Centrum Kształcenia Podyplomowego CM UJ

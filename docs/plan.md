@@ -1,6 +1,6 @@
 # Psycho-med — general plan
 
-_Last updated: 2026-11-17_
+_Last updated: 2026-11-24_
 
 ## Overview
 
@@ -69,13 +69,13 @@ Details and reasoning live in the ADRs:
 | --- | -------- | ------ |
 | [0001](adr/0001-plain-html-css.md) | Plain HTML + CSS, no build step | accepted |
 | [0002](adr/0002-site-information-architecture.md) | Site information architecture | accepted (URL form superseded for local links by [ADR 0014](adr/0014-relative-paths-for-local-links-and-assets.md)) |
-| [0003](adr/0003-content-fidelity.md) | Content fidelity and single source of truth | accepted |
+| [0003](adr/0003-content-fidelity.md) | Content fidelity and single source of truth | accepted (diacritics exception for the kurs site, [ADR 0020](adr/0020-restore-polish-diacritics-on-kurs-site.md)) |
 | [0004](adr/0004-styling-and-accessibility.md) | Styling follows the legacy text-only branding, made responsive and accessible; replaced by [0007](adr/0007-warm-slate-typography-redesign.md) | rejected |
 | [0005](adr/0005-hosting-and-deployment.md) | Hosting and deployment | proposed |
 | [0006](adr/0006-seo-metadata-and-analytics.md) | SEO, metadata and analytics | proposed |
 | [0007](adr/0007-warm-slate-typography-redesign.md) | Warm slate and sand palette, typography-led layout | superseded by [ADR 0010](adr/0010-adopt-option-c-bold-poster.md) |
 | [0008](adr/0008-home-page-as-entry-point.md) | Home page as an entry point linking to the articles | accepted, card body rule superseded by [ADR 0011](adr/0011-home-card-body-any-verbatim-sentence.md) |
-| [0009](adr/0009-static-site-generator-for-kurs-psychoterapii.md) | Static site generator for the kurs-psychoterapii site | proposed |
+| [0009](adr/0009-static-site-generator-for-kurs-psychoterapii.md) | Static site generator for the kurs-psychoterapii site; Decap uses the GitHub backend (owner decision 2026-11-24), OAuth handler still open | proposed |
 | [0010](adr/0010-adopt-option-c-bold-poster.md) | Bold poster direction (option C) with a placeholder hero photograph | accepted (hero treatment under review in [ADR 0016](adr/0016-light-hero-with-white-translucent-mask.md)) |
 | [0011](adr/0011-home-card-body-any-verbatim-sentence.md) | Home page cards may quote any verbatim sentence from the article | accepted |
 | [0012](adr/0012-email-shown-obfuscated-as-text.md) | E-mail shown obfuscated as text, real address only in `mailto:` | accepted |
@@ -85,7 +85,9 @@ Details and reasoning live in the ADRs:
 | [0016](adr/0016-light-hero-with-white-translucent-mask.md) | Light hero with a white translucent mask and dark type on the landing page, amending the hero treatment of ADR 0010 | proposed (implementation drift open, risk 18) |
 | [0017](adr/0017-css-only-mobile-menu-dropdown.md) | CSS-only dropdown menu for the navigation below 40rem, with no JavaScript | proposed |
 | [0018](adr/0018-mobile-spacing-and-shared-gutter.md) | Below 40rem, tighter site-wide spacing with one shared 1rem side gutter; hero specifics in ADR 0016 | accepted |
-| [0019](adr/0019-kurs-site-copies-fundacja-design-tokens.md) | kurs-psychoterapii copies the fundacja design tokens (no shared file), ports its components, and keeps data-driven navigation; root-absolute links are a known deviation from ADR 0014 | proposed |
+| [0019](adr/0019-kurs-site-copies-fundacja-design-tokens.md) | kurs-psychoterapii copies the fundacja design tokens (no shared file), ports its components, and keeps data-driven navigation; root-absolute links are a known deviation from ADR 0014; its hero and section backgrounds mirror ADR 0016 | proposed |
+| [0020](adr/0020-restore-polish-diacritics-on-kurs-site.md) | Restore Polish diacritics in the kurs-psychoterapii titles and link text, as an exception to ADR 0003 | accepted |
+| [0021](adr/0021-keep-white-mask-with-per-image-contrast-checks.md) | Keep the 65% white mask over photographs on both sites; check text contrast per image before it goes live | accepted |
 
 ## Content source of truth
 
@@ -224,9 +226,17 @@ kept in sync by hand ([ADR 0019](adr/0019-kurs-site-copies-fundacja-design-token
     look: copied tokens, ported components, header and footer generated from
     `kurs-psychoterapii/src/_data/nav.js`, and a light home hero. The decisions
     and known deviations are in [ADR 0019](adr/0019-kurs-site-copies-fundacja-design-tokens.md).
-    Review fixes are in `kurs-psychoterapii/PLAN.md`. Open owner items there
-    include the ASCII-transliterated titles (K-68) and the root-absolute link
-    deviation (K-65).
+     Review fixes are in `kurs-psychoterapii/PLAN.md`. The kurs site also has a
+     photo hero on the home page and per-section backgrounds (2026-11-23), built
+     from placeholder copies of fundacja's images, per
+     [ADR 0019](adr/0019-kurs-site-copies-fundacja-design-tokens.md). Diacritics
+     were restored in the migrated titles and one body link label
+     (2026-11-24, [ADR 0020](adr/0020-restore-polish-diacritics-on-kurs-site.md)).
+      Open owner items there include the root-absolute link deviation (K-65),
+      the final images (K-75), and the per-image contrast checks (K-79). The
+      contrast decision is made: option C, keep the 65% mask
+      ([ADR 0021](adr/0021-keep-white-mask-with-per-image-contrast-checks.md),
+      risk 23).
 
 ## Risks and open questions
 
@@ -254,6 +264,8 @@ kept in sync by hand ([ADR 0019](adr/0019-kurs-site-copies-fundacja-design-token
 | 20 | The hero button row boundary is estimated with Arial Bold metrics. The row fits from about 370px, and the CSS puts it on one row from 388px (`style.css` line 376). The CSS comment says 388px keeps 5% spare, which is why it overstates the boundary. This is a comment nit in the code, not changed here. Helvetica Neue on iOS may wrap earlier than either figure. ADR 0016 records the behaviour. | open, verify in milestone 9 |
 | 21 | The kurs-psychoterapii site uses root-absolute local links (`/assets/...`, `/edycje/...`), a known deviation from [ADR 0014](adr/0014-relative-paths-for-local-links-and-assets.md) for that site only ([ADR 0019](adr/0019-kurs-site-copies-fundacja-design-tokens.md)). Owner decision tracked as K-65 in `kurs-psychoterapii/PLAN.md`. | open, owner decision |
 | 22 | The kurs-psychoterapii design tokens are a copy of fundacja `style.css` lines 1 to 15. Nothing checks that they match. A token change made in fundacja and not copied drifts silently. ADR 0019 makes the copy a review rule. | open, review rule only |
+| 23 | **Decided 2026-11-24 (option C), open until checks pass: WCAG AA contrast over the photographs, both sites.** Both sites put a 65% white translucent mask over a photograph: fundacja's hero ([ADR 0016](adr/0016-light-hero-with-white-translucent-mask.md)) and the kurs site's home hero and section backgrounds ([ADR 0019](adr/0019-kurs-site-copies-fundacja-design-tokens.md)). In the worst case, a dark photograph pixel under the mask, the accent links `#c2410c` measure about 2.1:1 and the ink-soft `#4a443d` mono labels about 3.9:1, both failing AA. At an average pixel the accent links measure about 3.6:1. Body text `#14110e` passes at about 7.7:1. Owner chose to keep the current 65% mask with no CSS change now. Mitigation: before each image goes live, check accent links `#c2410c`, ink-soft `#4a443d` labels and body text against the masked image, AA 4.5:1 for normal text and 3:1 for large text. Decision recorded in [ADR 0021](adr/0021-keep-white-mask-with-per-image-contrast-checks.md). Tracked as K-77 (decision) and K-79 (per-image check, blocked by K-75) in `kurs-psychoterapii/PLAN.md`. Closed when every final image has passed. | open until per-image checks pass |
+| 24 | Decap login for the kurs site: the client agrees to have a GitHub account, so the GitHub backend is used directly ([ADR 0009](adr/0009-static-site-generator-for-kurs-psychoterapii.md), owner decision 2026-11-24). On a host that is not Netlify, the GitHub backend still needs an OAuth app and handler to complete login. This is an open infrastructure item; server details are pending from the owner. | open, infra, pending owner |
 
 ## ADR index
 

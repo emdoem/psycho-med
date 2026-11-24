@@ -8,7 +8,7 @@ Index of every ADR in this repository. The general plan lives at
 | --- | ----- | ------ |
 | [0001](0001-plain-html-css.md) | Build the site as plain HTML and CSS with no build step | accepted |
 | [0002](0002-site-information-architecture.md) | Site information architecture | accepted (URL form superseded for local links by ADR 0014) |
-| [0003](0003-content-fidelity.md) | Reproduce the archived content verbatim with a single shared source for contact data | accepted |
+| [0003](0003-content-fidelity.md) | Reproduce the archived content verbatim with a single shared source for contact data | accepted (diacritics exception for the kurs-psychoterapii site, ADR 0020) |
 | [0004](0004-styling-and-accessibility.md) | Styling follows the legacy text-only branding, made responsive and accessible | rejected |
 | [0005](0005-hosting-and-deployment.md) | Host the site as static files on a static host | proposed |
 | [0006](0006-seo-metadata-and-analytics.md) | Minimal, hand-written SEO metadata and no analytics | proposed |
@@ -25,11 +25,13 @@ Index of every ADR in this repository. The general plan lives at
 | [0017](0017-css-only-mobile-menu-dropdown.md) | Collapse the navigation into a CSS-only dropdown below 40rem | proposed |
 | [0018](0018-mobile-spacing-and-shared-gutter.md) | Tighten spacing below 40rem with one shared 1rem side gutter | accepted |
 | [0019](0019-kurs-site-copies-fundacja-design-tokens.md) | Copy the fundacja design tokens and port its components into kurs-psychoterapii, with a sync rule and data-driven navigation | proposed |
+| [0020](0020-restore-polish-diacritics-on-kurs-site.md) | Restore Polish diacritics in the kurs-psychoterapii titles and link text, as an exception to ADR 0003 | accepted |
+| [0021](0021-keep-white-mask-with-per-image-contrast-checks.md) | Keep the 65% white mask over photographs and check text contrast per image before it goes live | accepted |
 
 ## Numbering
 
 Numbers are zero-padded to four digits and allocated sequentially — the next ADR
-is `0020`. Numbers are never reused or renumbered. A superseded decision keeps
+is `0022`. Numbers are never reused or renumbered. A superseded decision keeps
 its number and is marked `superseded by ADR NNNN`; the replacing ADR is written
 fresh.
 

@@ -121,13 +121,22 @@ a:hover{color:var(--accent-ink);text-decoration:underline}
 
 .content{max-width:var(--measure);margin-inline:auto;padding-inline:clamp(1.25rem,4vw,2.5rem)}
 
-/* hero: light variant (ADR 0016). No photograph: the source image is 441 px wide,
-   below the 1200 px threshold, so the hero sits on paper. If a wide photograph is
-   added later, put it behind a rgba(255,255,255,.65) mask as in fundacja. */
-.hero{padding:0;color:var(--ink);background:var(--paper)}
-/* no background image here, so the bottom padding is short; the index list follows via .section.
-   With a photo (fundacja pattern) the bottom padding would match the top again. */
+/* hero: light variant (ADR 0016, mirrored from fundacja/assets/css/style.css).
+   Base .hero is the no-photo variant: it sits on paper with a short bottom padding,
+   so removing the photo (drop the hero--photo class in src/index.njk) keeps the layout intact.
+   .hero--photo adds the decorative background behind a white translucent mask.
+   Placeholder: placeholder-hero.jpg was copied from fundacja; the owner will replace it. */
+.hero{padding:0;color:var(--ink);background-color:var(--paper)}
+.hero--photo{
+  background-image:linear-gradient(rgba(255,255,255,.65),rgba(255,255,255,.65)),url("/assets/img/placeholder-hero.jpg");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+/* no-photo: the index list follows via .section, so the bottom padding stays short.
+   Photo: the bottom padding matches the top again (fundacja). */
 .hero__inner{padding-top:clamp(2.5rem,7vw,4.5rem);padding-bottom:clamp(1rem,3vw,2rem)}
+.hero--photo .hero__inner{padding-bottom:clamp(2.5rem,7vw,4.5rem)}
 .hero :focus-visible{outline-color:var(--ink)}
 .hero__title{
   margin:0 0 1.25rem;
@@ -241,6 +250,23 @@ a:hover{color:var(--accent-ink);text-decoration:underline}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}
+}
+
+/* Inner-page backgrounds (fundacja pattern: class on <main>, set per section in base.njk
+   from src/_data/backgrounds.json). Same 65% white mask as the hero (ADR 0016).
+   Placeholders copied from fundacja: placeholder-bg-1.jpg and placeholder-bg-2.jpg.
+   The owner will replace these images later. */
+.page-bg-1,.page-bg-2{
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+.page-bg-1{background-image:linear-gradient(rgba(255,255,255,.65),rgba(255,255,255,.65)),url("/assets/img/placeholder-bg-1.jpg")}
+.page-bg-2{background-image:linear-gradient(rgba(255,255,255,.65),rgba(255,255,255,.65)),url("/assets/img/placeholder-bg-2.jpg")}
+/* iOS Safari ignores background-attachment: fixed; fall back to scroll so the cover image still renders. */
+@supports (-webkit-touch-callout: none) {
+  .page-bg-1,.page-bg-2{background-attachment:scroll}
 }
 
 /* inner pages: page head, section nav, prose */
@@ -357,7 +383,7 @@ a:hover{color:var(--accent-ink);text-decoration:underline}
   .footer__inner,.footer__bottom{padding-inline:1rem}
 
   /* hero */
-  .hero__inner{padding-top:1.75rem;padding-bottom:1.75rem}
+  .hero__inner,.hero--photo .hero__inner{padding-top:1.75rem;padding-bottom:1.75rem}
   .hero__title{margin:0 0 .85rem}
   .hero__lead{margin:1.1rem 0 0;padding:.8rem 0 .8rem 1.1rem}
   .hero__actions{margin-top:1.25rem;gap:.4rem;flex-wrap:wrap}

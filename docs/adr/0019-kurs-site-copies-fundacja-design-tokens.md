@@ -2,6 +2,7 @@
 
 - Status: proposed
 - Date: 2026-11-17
+- Revised: 2026-11-24 (consequence added for the hero and section backgrounds)
 
 ## Context
 
@@ -78,6 +79,25 @@ The kurs site adopts the fundacja design system by copying, not by sharing a fil
 - The nav data file is the only place to change a header or footer label, and a
   broken entry fails the build instead of producing a dead link.
 - The root-absolute links are a known deviation from ADR 0014 while K-65 is open.
+- **Hero and section backgrounds (2026-11-24).** The kurs site mirrors the
+  fundacja hero treatment of [ADR 0016](0016-light-hero-with-white-translucent-mask.md):
+  a photo hero on the home page, and a per-section background behind a white
+  65% translucent mask. The mapping lives in `kurs-psychoterapii/src/_data/backgrounds.json`:
+  `program` and `kadra` use `page-bg-1`; `rekrutacja` and `harmonogram` use
+  `page-bg-2`. The home page, announcements and footer-only pages have none.
+  The mask is hard-coded in both sites' CSS, so the contrast risk in
+  [plan risk 23](../plan.md#risks-and-open-questions) applies to both.
+- **Placeholder images, copied from fundacja byte for byte.** The owner will
+  replace them. Each is a placeholder with unknown source and licence:
+  - `fundacja/assets/img/hero-lubelska.jpg` → `kurs-psychoterapii/src/assets/img/placeholder-hero.jpg`
+    (1920×1080, 675 KB), the home hero.
+  - `fundacja/assets/img/gabinet-01.jpg` → `placeholder-bg-1.jpg`
+    (1376×768, 823 KB), for Program and Kadra.
+  - `fundacja/assets/img/kurs-01.jpg` → `placeholder-bg-2.jpg`
+    (1376×768, 878 KB), for Rekrutacja and Harmonogram.
+  The file size and the source risks of the fundacja images (plan risks 9, 13
+  and 15) apply to these copies too. Tracked as K-75 and K-76 in
+  `kurs-psychoterapii/PLAN.md`.
 - This ADR refines the phrase "shared CSS design-token file" in ADR 0009. The
   mechanism is a copy, and the tokens are not shared between the two sites.
 - Not done: no shared stylesheet, no shared package, no automated token sync check,
